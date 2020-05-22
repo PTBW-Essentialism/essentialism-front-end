@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SplashContainer } from "../main/Landing";
+import { SplashContainer, SplashTitle, SplashButton, ButtonLink } from "../main/Landing";
 import styled from "styled-components";
 import * as yup from "yup";
 
@@ -8,6 +8,8 @@ export const StyledForm = styled.form`
     flex-direction: column;
     justify-content: center;
     align-items: space-evenly;
+    position: relative;
+    top: -150px;
 `;
 
 export const StyledLabel = styled.label`
@@ -17,7 +19,50 @@ export const StyledLabel = styled.label`
 export const StyledInput = styled.input`
     background-color: #8FCB9B;
     color: white;
+    border: 1px solid white;
+    border-radius: 7px;
+    font-family: 'Josefin Slab', serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    width: 100%;
+    margin: 2%;
+    text-align: center;
+
+    &:focus {
+        background-color: white;
+        color: #8FCB9B;
+    }
+
+    ::placeholder {
+        color: white;
+        text-align: center;
+    }
 `;
+
+export const handleChange = (e, stateObj, setterCB) => {
+    const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    setterCB({
+        ...stateObj,
+        [e.target.name]: value
+    });
+    console.log(stateObj);
+    //validate();
+}
+
+export const validate = () => {
+
+}
+
+const handleSubmit = (e, setterCB) => {
+    e.preventDefault();
+    setterCB({
+        firstName: "",
+        lastName: "",
+        email: "",
+        username: "",
+        password: ""
+    });
+}
 
 const Register = () => {
     
@@ -28,82 +73,70 @@ const Register = () => {
         username: "",
         password: ""
     });
-    
-    const handleChange = e => {
-        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
-        setFormState({
-            ...formState,
-            [e.target.name]: value
-        });
-        console.log(formState);
-        //validate();
-    }
-
-    const validate = () => {
-
-    }
-
-    const handleSubmit = e => {
-        e.preventDefault();
-        setFormState({
-            firstName: "",
-            lastName: "",
-            email: "",
-            username: "",
-            password: ""
-        });
-    }
 
     return (
         <SplashContainer>
-            <StyledForm onSubmit={handleSubmit}>
-                <label htmlFor="firstName">
-                    <input
+            <SplashTitle>essentialism</SplashTitle>
+            <StyledForm onSubmit={e => {
+                handleSubmit(e, setFormState);
+            }}>
+                <StyledLabel htmlFor="firstName">
+                    <StyledInput
                         id="firstName"
                         name="firstName"
-                        placeholder="First Name"
+                        placeholder="enter first name"
                         value={formState.firstName}
-                        onChange={handleChange}
+                        onChange={e => {
+                            handleChange(e, formState, setFormState);
+                        }}
                     />
-                </label>
-                <label htmlFor="lastName">
-                    <input
+                </StyledLabel>
+                <StyledLabel htmlFor="lastName">
+                    <StyledInput
                         id="lastName"
                         name="lastName"
-                        placeholder="Last Name"
+                        placeholder="enter last name"
                         value={formState.lastName}
-                        onChange={handleChange}
+                        onChange={e => {
+                            handleChange(e, formState, setFormState);
+                        }}
                     />
-                </label>
-                <label htmlFor="email">
-                    <input
+                </StyledLabel>
+                <StyledLabel htmlFor="email">
+                    <StyledInput
                         id="email"
                         name="email"
-                        placeholder="Email"
+                        placeholder="enter email"
                         value={formState.email}
-                        onChange={handleChange}
+                        onChange={e => {
+                            handleChange(e, formState, setFormState);
+                        }}
                     />
-                </label>
-                <label htmlFor="username">
-                    <input
+                </StyledLabel>
+                <StyledLabel htmlFor="username">
+                    <StyledInput
                         id="username"
                         name="username"
-                        placeholder="Username"
+                        placeholder="enter username"
                         value={formState.username}
-                        onChange={handleChange}
+                        onChange={e => {
+                            handleChange(e, formState, setFormState);
+                        }}
                     />
-                </label>
-                <label htmlFor="password">
-                    <input
+                </StyledLabel>
+                <StyledLabel htmlFor="password">
+                    <StyledInput
                         type="password"
                         id="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="enter password"
                         value={formState.password}
-                        onChange={handleChange}
+                        onChange={e => {
+                            handleChange(e, formState, setFormState);
+                        }}
                     />
-                </label>
-                <button>Submit</button>
+                </StyledLabel>
+                <SplashButton>register</SplashButton>
             </StyledForm>
         </SplashContainer>
     );

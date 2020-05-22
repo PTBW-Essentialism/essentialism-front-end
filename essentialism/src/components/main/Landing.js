@@ -8,40 +8,40 @@ export const SplashContainer = styled.div`
     justify-content: center;
     align-items: flex-start;
     background: #8FCB9B;
-    border: 3px solid black;
     width: 500px;
     height: 500px;
     border-radius: 250px;
-    margin: auto auto;
+    margin: 2% auto;
 `;
 
-const SplashTitle = styled.h1`
+export const SplashTitle = styled.h1`
     font-size: 6.5rem;
     font-family: 'Vibur', cursive;
-    color: white;
+    color: #F8F8FF;
     width: 100%;
-    letter-spacing: 7px;
-    -webkit-text-stroke: 1px black;
+    letter-spacing: 2px;
     padding: 50px;
 `;
 
-const ButtonLink = styled.a`
+export const ButtonLink = styled.a`
     width: 25%;
     margin: 0% 1% 10% 1%;
-
-    &:hover{
-        color: white;
-    }
 `;
 
-const SplashButton = styled.button`
+export const SplashButton = styled.button`
     width: 100%;
     font-family: 'Vibur', cursive;
     font-size: 2rem;
-    background-color: white;
-    border: 3px solid black;
+    background-color: #F8F8FF;
+    border: 1px solid white;
     border-radius: 20px;
-    
+    padding: 5px;
+    color: #8FCB9B;
+
+    &:hover{
+        color: #5B9279;
+        background-color: white;
+    }
 `;
 
 const Landing = props => {
