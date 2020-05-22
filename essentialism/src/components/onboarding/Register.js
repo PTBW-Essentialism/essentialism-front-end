@@ -19,6 +19,31 @@ export const StyledInput = styled.input`
     color: white;
 `;
 
+export const handleChange = (e, stateObj, setterCB) => {
+    const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    setterCB({
+        ...stateObj,
+        [e.target.name]: value
+    });
+    console.log(stateObj);
+    //validate();
+}
+
+export const validate = () => {
+
+}
+
+export const handleSubmit = (e, setterCB) => {
+    e.preventDefault();
+    setterCB({
+        firstName: "",
+        lastName: "",
+        email: "",
+        username: "",
+        password: ""
+    });
+}
+
 const Register = () => {
     
     const [formState, setFormState] = useState({
@@ -28,43 +53,22 @@ const Register = () => {
         username: "",
         password: ""
     });
-    
-    const handleChange = e => {
-        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
-        setFormState({
-            ...formState,
-            [e.target.name]: value
-        });
-        console.log(formState);
-        //validate();
-    }
-
-    const validate = () => {
-
-    }
-
-    const handleSubmit = e => {
-        e.preventDefault();
-        setFormState({
-            firstName: "",
-            lastName: "",
-            email: "",
-            username: "",
-            password: ""
-        });
-    }
 
     return (
         <SplashContainer>
             <SplashTitle>essentialism</SplashTitle>
-            <StyledForm onSubmit={handleSubmit}>
+            <StyledForm onSubmit={e => {
+                handleSubmit(e, setFormState);
+            }}>
                 <label htmlFor="firstName">
                     <input
                         id="firstName"
                         name="firstName"
                         placeholder="First Name"
                         value={formState.firstName}
-                        onChange={handleChange}
+                        onChange={e => {
+                            handleChange(e, formState, setFormState);
+                        }}
                     />
                 </label>
                 <label htmlFor="lastName">
@@ -73,7 +77,9 @@ const Register = () => {
                         name="lastName"
                         placeholder="Last Name"
                         value={formState.lastName}
-                        onChange={handleChange}
+                        onChange={e => {
+                            handleChange(e, formState, setFormState);
+                        }}
                     />
                 </label>
                 <label htmlFor="email">
@@ -82,7 +88,9 @@ const Register = () => {
                         name="email"
                         placeholder="Email"
                         value={formState.email}
-                        onChange={handleChange}
+                        onChange={e => {
+                            handleChange(e, formState, setFormState);
+                        }}
                     />
                 </label>
                 <label htmlFor="username">
@@ -91,7 +99,9 @@ const Register = () => {
                         name="username"
                         placeholder="Username"
                         value={formState.username}
-                        onChange={handleChange}
+                        onChange={e => {
+                            handleChange(e, formState, setFormState);
+                        }}
                     />
                 </label>
                 <label htmlFor="password">
@@ -101,7 +111,9 @@ const Register = () => {
                         name="password"
                         placeholder="Password"
                         value={formState.password}
-                        onChange={handleChange}
+                        onChange={e => {
+                            handleChange(e, formState, setFormState);
+                        }}
                     />
                 </label>
                 <button>Submit</button>

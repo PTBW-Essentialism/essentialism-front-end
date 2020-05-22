@@ -56,7 +56,15 @@ export default Login;
 // import { SplashContainer } from "../main/Landing";
 // import styled from "styled-components";
 // import * as yup from "yup";
-//import { StyledForm, StyledLabel, StyledInput, handleChange, handleSubmit, validate } from "../onboarding/Register";
+// import { StyledForm, StyledLabel, StyledInput, handleChange, handleSubmit, validate } from "../onboarding/Register";
+
+// export const handleSubmit = (e, setterCB) => {
+//     e.preventDefault();
+//     setterCB({
+//         username: "",
+//         password: ""
+//     });
+// }
 
 // const Login = () => {
     
@@ -67,14 +75,18 @@ export default Login;
 
 //     return (
 //         <SplashContainer>
-//             <StyledForm onSubmit={handleSubmit}>
+//             <StyledForm onSubmit={e => {
+//                 handleSubmit(e, setFormState);
+//             }}>
 //                 <label htmlFor="username">
 //                     <input
 //                         id="username"
 //                         name="username"
 //                         placeholder="Username"
 //                         value={formState.username}
-//                         onChange={handleChange}
+//                         onChange={e => {
+//                             handleChange(e, formState, setFormState);
+//                         }}
 //                     />
 //                 </label>
 //                 <label htmlFor="password">
@@ -84,7 +96,9 @@ export default Login;
 //                         name="password"
 //                         placeholder="Password"
 //                         value={formState.password}
-//                         onChange={handleChange}
+//                         onChange={e => {
+//                             handleChange(e, formState, setFormState);
+//                         }}
 //                     />
 //                 </label>
 //                 <button>Submit</button>
