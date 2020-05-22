@@ -37,8 +37,12 @@ const Landing = props => {
     return (
         <SplashContainer>
             <SplashTitle>essentialism</SplashTitle>
-            <SplashButton>Sign In</SplashButton>
-            <SplashButton>Sign Up</SplashButton>
+            <Link>
+                <SplashButton>Sign In</SplashButton>
+            </Link>
+            <Link>
+                <SplashButton>Sign Up</SplashButton>
+            </Link>
         </SplashContainer>
     );
 };
