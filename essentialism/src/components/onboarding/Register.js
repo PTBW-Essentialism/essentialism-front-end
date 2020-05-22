@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SplashContainer } from "../main/Landing";
+import { SplashContainer, SplashTitle, SplashButton, ButtonLink } from "../main/Landing";
 import styled from "styled-components";
 import * as yup from "yup";
 
@@ -56,6 +56,7 @@ const Register = () => {
 
     return (
         <SplashContainer>
+            <SplashTitle>essentialism</SplashTitle>
             <StyledForm onSubmit={handleSubmit}>
                 <label htmlFor="firstName">
                     <input
