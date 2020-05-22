@@ -1,16 +1,10 @@
 import React, { useState } from "react";
+import {axiosWithAuth} from "../../utils/AxiosWithAuth";
 import { SplashContainer, SplashTitle, SplashButton, ButtonLink } from "../main/Landing";
 import styled from "styled-components";
 import * as yup from "yup";
 import { StyledForm, StyledLabel, StyledInput, handleChange, validate } from "../onboarding/Register";
 
-const handleSubmit = (e, setterCB) => {
-    e.preventDefault();
-    setterCB({
-        username: "",
-        password: ""
-    });
-}
 
 const Login = () => {
     
@@ -18,6 +12,27 @@ const Login = () => {
         username: "",
         password: ""
     });
+
+    const handleSubmit = (e, setterCB) => {
+        e.preventDefault();
+
+        loginAuth();
+
+        setterCB({
+            username: "",
+            password: ""
+        });
+    }
+
+    const loginAuth = () => {
+        axiosWithAuth()
+             .post('/auth/login', formState)
+             .then((res) => {
+                 console.log(res);
+             })
+             .catch(err => console.log(err))
+    }
+    
 
     return (
         <SplashContainer>
