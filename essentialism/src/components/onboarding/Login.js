@@ -29,7 +29,7 @@ const Login = () => {
                     <StyledInput
                         id="username"
                         name="username"
-                        placeholder="Username"
+                        placeholder="enter username"
                         value={formState.username}
                         onChange={e => {
                             handleChange(e, formState, setFormState);
@@ -41,14 +41,14 @@ const Login = () => {
                         type="password"
                         id="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="enter password"
                         value={formState.password}
                         onChange={e => {
                             handleChange(e, formState, setFormState);
                         }}
                     />
                 </StyledLabel>
-                <SplashButton>Submit</SplashButton>
+                <SplashButton>login</SplashButton>
             </StyledForm>
         </SplashContainer>
     );

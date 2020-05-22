@@ -84,7 +84,7 @@ const Register = () => {
                     <StyledInput
                         id="firstName"
                         name="firstName"
-                        placeholder="First Name"
+                        placeholder="enter first name"
                         value={formState.firstName}
                         onChange={e => {
                             handleChange(e, formState, setFormState);
@@ -95,7 +95,7 @@ const Register = () => {
                     <StyledInput
                         id="lastName"
                         name="lastName"
-                        placeholder="Last Name"
+                        placeholder="enter last name"
                         value={formState.lastName}
                         onChange={e => {
                             handleChange(e, formState, setFormState);
@@ -106,7 +106,7 @@ const Register = () => {
                     <StyledInput
                         id="email"
                         name="email"
-                        placeholder="Email"
+                        placeholder="enter email"
                         value={formState.email}
                         onChange={e => {
                             handleChange(e, formState, setFormState);
@@ -117,7 +117,7 @@ const Register = () => {
                     <StyledInput
                         id="username"
                         name="username"
-                        placeholder="Username"
+                        placeholder="enter username"
                         value={formState.username}
                         onChange={e => {
                             handleChange(e, formState, setFormState);
@@ -129,14 +129,14 @@ const Register = () => {
                         type="password"
                         id="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="enter password"
                         value={formState.password}
                         onChange={e => {
                             handleChange(e, formState, setFormState);
                         }}
                     />
                 </StyledLabel>
-                <SplashButton>Submit</SplashButton>
+                <SplashButton>register</SplashButton>
             </StyledForm>
         </SplashContainer>
     );
