@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 
-const SplashContainer = styled.div`
+export const SplashContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -20,7 +20,7 @@ const SplashTitle = styled.h1`
     font-family: 'Vibur', cursive;
     color: white;
     width: 100%;
-    letter-spacing: 6px;
+    letter-spacing: 7px;
     -webkit-text-stroke: 1px black;
     padding: 50px;
 `;
@@ -28,6 +28,10 @@ const SplashTitle = styled.h1`
 const ButtonLink = styled.a`
     width: 25%;
     margin: 0% 1% 10% 1%;
+
+    &:hover{
+        color: white;
+    }
 `;
 
 const SplashButton = styled.button`

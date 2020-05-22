@@ -13,6 +13,7 @@ function App() {
       <Route exact path="/login">
       </Route>
       <Route exact path="/register">
+        <Register />
       </Route>
     </div>
   );
