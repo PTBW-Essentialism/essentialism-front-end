@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Route, Link } from "react-router-dom";
 import Landing from "./components/main/Landing";
+import Register from "./components/onboarding/Register";
 
 function App() {
   return (
@@ -9,11 +10,10 @@ function App() {
       <Route exact path="/">
         <Landing />
       </Route>
-      <Route exact path="/signin">
-        <Landing />
+      <Route exact path="/login">
       </Route>
-      <Route exact path="/signup">
-        <Landing />
+      <Route exact path="/register">
+        <Register />
       </Route>
     </div>
   );

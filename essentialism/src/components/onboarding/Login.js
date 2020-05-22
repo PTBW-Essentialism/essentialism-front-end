@@ -51,3 +51,46 @@ class Login extends React.Component {
 };
 
 export default Login;
+
+// import React, { useState } from "react";
+// import { SplashContainer } from "../main/Landing";
+// import styled from "styled-components";
+// import * as yup from "yup";
+//import { StyledForm, StyledLabel, StyledInput, handleChange, handleSubmit, validate } from "../onboarding/Register";
+
+// const Login = () => {
+    
+//     const [formState, setFormState] = useState({
+//         username: "",
+//         password: ""
+//     });
+
+//     return (
+//         <SplashContainer>
+//             <StyledForm onSubmit={handleSubmit}>
+//                 <label htmlFor="username">
+//                     <input
+//                         id="username"
+//                         name="username"
+//                         placeholder="Username"
+//                         value={formState.username}
+//                         onChange={handleChange}
+//                     />
+//                 </label>
+//                 <label htmlFor="password">
+//                     <input
+//                         type="password"
+//                         id="password"
+//                         name="password"
+//                         placeholder="Password"
+//                         value={formState.password}
+//                         onChange={handleChange}
+//                     />
+//                 </label>
+//                 <button>Submit</button>
+//             </StyledForm>
+//         </SplashContainer>
+//     );
+// }
+
+// export default Login;
