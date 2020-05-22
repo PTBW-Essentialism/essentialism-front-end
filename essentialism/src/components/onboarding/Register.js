@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { SplashContainer, SplashTitle, SplashButton, ButtonLink } from "../main/Landing";
 import styled from "styled-components";
 import * as yup from "yup";
+import axios from "axios"
 
 export const StyledForm = styled.form`
     display: flex;
@@ -53,8 +54,18 @@ export const validate = () => {
 
 }
 
-const handleSubmit = (e, setterCB) => {
+const handleSubmit = (e, setterCB, formState) => {
     e.preventDefault();
+
+    axios
+    .post("https://essentialapi.herokuapp.com/auth/register", formState)
+    .then((res) => {
+        console.log(res)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+
     setterCB({
         firstName: "",
         lastName: "",
@@ -78,7 +89,7 @@ const Register = () => {
         <SplashContainer>
             <SplashTitle>essentialism</SplashTitle>
             <StyledForm onSubmit={e => {
-                handleSubmit(e, setFormState);
+                handleSubmit(e, setFormState, formState);
             }}>
                 <StyledLabel htmlFor="firstName">
                     <StyledInput
