@@ -3,18 +3,18 @@ import { SplashContainer } from "../main/Landing";
 import styled from "styled-components";
 import * as yup from "yup";
 
-const StyledForm = styled.form`
+export const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: space-evenly;
 `;
 
-const StyledLabel = styled.label`
+export const StyledLabel = styled.label`
 
 `;
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
     background-color: #8FCB9B;
     color: white;
 `;
