@@ -8,6 +8,8 @@ export const StyledForm = styled.form`
     flex-direction: column;
     justify-content: center;
     align-items: space-evenly;
+    position: relative;
+    top: -150px;
 `;
 
 export const StyledLabel = styled.label`
@@ -17,6 +19,24 @@ export const StyledLabel = styled.label`
 export const StyledInput = styled.input`
     background-color: #8FCB9B;
     color: white;
+    border: 1px solid white;
+    border-radius: 7px;
+    font-family: 'Josefin Slab', serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    width: 100%;
+    margin: 2%;
+    text-align: center;
+
+    &:focus {
+        background-color: white;
+        color: #8FCB9B;
+    }
+
+    ::placeholder {
+        color: white;
+        text-align: center;
+    }
 `;
 
 export const handleChange = (e, stateObj, setterCB) => {
@@ -33,7 +53,7 @@ export const validate = () => {
 
 }
 
-export const handleSubmit = (e, setterCB) => {
+const handleSubmit = (e, setterCB) => {
     e.preventDefault();
     setterCB({
         firstName: "",
@@ -60,8 +80,8 @@ const Register = () => {
             <StyledForm onSubmit={e => {
                 handleSubmit(e, setFormState);
             }}>
-                <label htmlFor="firstName">
-                    <input
+                <StyledLabel htmlFor="firstName">
+                    <StyledInput
                         id="firstName"
                         name="firstName"
                         placeholder="First Name"
@@ -70,9 +90,9 @@ const Register = () => {
                             handleChange(e, formState, setFormState);
                         }}
                     />
-                </label>
-                <label htmlFor="lastName">
-                    <input
+                </StyledLabel>
+                <StyledLabel htmlFor="lastName">
+                    <StyledInput
                         id="lastName"
                         name="lastName"
                         placeholder="Last Name"
@@ -81,9 +101,9 @@ const Register = () => {
                             handleChange(e, formState, setFormState);
                         }}
                     />
-                </label>
-                <label htmlFor="email">
-                    <input
+                </StyledLabel>
+                <StyledLabel htmlFor="email">
+                    <StyledInput
                         id="email"
                         name="email"
                         placeholder="Email"
@@ -92,9 +112,9 @@ const Register = () => {
                             handleChange(e, formState, setFormState);
                         }}
                     />
-                </label>
-                <label htmlFor="username">
-                    <input
+                </StyledLabel>
+                <StyledLabel htmlFor="username">
+                    <StyledInput
                         id="username"
                         name="username"
                         placeholder="Username"
@@ -103,9 +123,9 @@ const Register = () => {
                             handleChange(e, formState, setFormState);
                         }}
                     />
-                </label>
-                <label htmlFor="password">
-                    <input
+                </StyledLabel>
+                <StyledLabel htmlFor="password">
+                    <StyledInput
                         type="password"
                         id="password"
                         name="password"
@@ -115,8 +135,8 @@ const Register = () => {
                             handleChange(e, formState, setFormState);
                         }}
                     />
-                </label>
-                <button>Submit</button>
+                </StyledLabel>
+                <SplashButton>Submit</SplashButton>
             </StyledForm>
         </SplashContainer>
     );

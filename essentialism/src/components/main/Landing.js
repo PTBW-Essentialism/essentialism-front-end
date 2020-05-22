@@ -31,7 +31,7 @@ export const ButtonLink = styled.a`
 export const SplashButton = styled.button`
     width: 100%;
     font-family: 'Vibur', cursive;
-    font-size: 2.5rem;
+    font-size: 2rem;
     background-color: #F8F8FF;
     border: 1px solid white;
     border-radius: 20px;
