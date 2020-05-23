@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {axiosWithAuth} from "../../utils/AxiosWithAuth";
 import { SplashContainer, SplashTitle, SplashButton, ButtonLink } from "../main/Landing";
 import styled from "styled-components";
 import * as yup from "yup";
 import { StyledForm, StyledLabel, StyledInput, handleChange, validate } from "../onboarding/Register";
+import {Redirect} from "react-router-dom";
 
 
-const Login = () => {
-    
+const Login = (props) => {
     const [formState, setFormState] = useState({
         username: "",
         password: ""
@@ -29,6 +29,13 @@ const Login = () => {
              .post('/auth/login', formState)
              .then((res) => {
                  console.log(res);
+                 console.log(res.data.token.userId);
+                 if (!window.localStorage.getItem('token')) {
+                    window.localStorage.setItem('token', res.data.token)
+                    props.history.push(`/users/${res.data.token.userId}/dashboard`)
+                } else if (window.localStorage.getItem('token')) {
+                    props.history.push(`/users/${res.data.token.userId}/dashboard`)
+                }
              })
              .catch(err => console.log(err))
     }
