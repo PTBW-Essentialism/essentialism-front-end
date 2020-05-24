@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
+import { CustomButton } from "./CustomButton";
 
-export const SplashContainer = styled.div`
+export const LandingContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -11,10 +12,10 @@ export const SplashContainer = styled.div`
     width: 500px;
     height: 500px;
     border-radius: 250px;
-    margin: 2% auto;
+    margin: 7% auto;
 `;
 
-export const SplashTitle = styled.h1`
+export const LandingTitle = styled.h1`
     font-size: 6.5rem;
     font-family: 'Vibur', cursive;
     color: #F8F8FF;
@@ -28,7 +29,7 @@ export const ButtonLink = styled.a`
     margin: 0% 1% 10% 1%;
 `;
 
-export const SplashButton = styled.button`
+export const LandingButton = styled.button`
     width: 100%;
     font-family: 'Vibur', cursive;
     font-size: 2rem;
@@ -46,15 +47,15 @@ export const SplashButton = styled.button`
 
 const Landing = props => {
     return (
-        <SplashContainer>
-            <SplashTitle>essentialism</SplashTitle>
+        <LandingContainer>
+            <LandingTitle>essentialism</LandingTitle>
             <ButtonLink href="/login">
-                <SplashButton>login</SplashButton>
+                <CustomButton type="landing">login</CustomButton>
             </ButtonLink>
             <ButtonLink href="/register">
-                <SplashButton>register</SplashButton>
+                <CustomButton type="landing">register</CustomButton>
             </ButtonLink>
-        </SplashContainer>
+        </LandingContainer>
     );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {axiosWithAuth} from "../../utils/AxiosWithAuth";
-import { SplashContainer, SplashTitle, SplashButton, ButtonLink } from "../main/Landing";
+import { LandingContainer, LandingTitle, LandingButton, ButtonLink } from "../main/Landing";
 import styled from "styled-components";
 import * as yup from "yup";
 import { StyledForm, StyledLabel, StyledInput, handleChange, validate } from "../onboarding/Register";
@@ -42,8 +42,8 @@ const Login = (props) => {
     
 
     return (
-        <SplashContainer>
-            <SplashTitle>essentialism</SplashTitle>
+        <LandingContainer>
+            <LandingTitle>essentialism</LandingTitle>
             <StyledForm onSubmit={e => {
                 handleSubmit(e, setFormState);
             }}>
@@ -70,9 +70,9 @@ const Login = (props) => {
                         }}
                     />
                 </StyledLabel>
-                <SplashButton>login</SplashButton>
+                <LandingButton>login</LandingButton>
             </StyledForm>
-        </SplashContainer>
+        </LandingContainer>
     );
 }
 
