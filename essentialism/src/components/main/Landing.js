@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
+import { CustomButton } from "./CustomButton";
 
 export const LandingContainer = styled.div`
     display: flex;
@@ -49,10 +50,10 @@ const Landing = props => {
         <LandingContainer>
             <LandingTitle>essentialism</LandingTitle>
             <ButtonLink href="/login">
-                <LandingButton>login</LandingButton>
+                <CustomButton type="landing">login</CustomButton>
             </ButtonLink>
             <ButtonLink href="/register">
-                <LandingButton>register</LandingButton>
+                <CustomButton type="landing">register</CustomButton>
             </ButtonLink>
         </LandingContainer>
     );

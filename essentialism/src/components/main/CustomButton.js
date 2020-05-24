@@ -17,4 +17,16 @@ export const CustomButton = styled.button`
         color: #5B9279;
         background-color: white;
     }
+
+    ${props => (props.type === "landing" ? `
+        font-size: 2.5rem;
+        text-align: center;
+        height: 60px;
+        width: 130px;
+        border-radius: 30px;
+        position: relative;
+        top: -100px;
+        padding: 0px;
+        margin: 0px;
+    ` : null)}
 `;
