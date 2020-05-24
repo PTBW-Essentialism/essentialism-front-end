@@ -16,11 +16,15 @@ const LogoStyling = styled.div`
     margin: auto 5px;
 `;
 
+const CustomLink = styled.a`
+    text-decoration: none;
+`;
+
 const AppLogo = () => {
     return(
-        <Link to="/">
+        <CustomLink href="/">
             <LogoStyling>es</LogoStyling>
-        </Link>
+        </CustomLink>
     );
 }
 
