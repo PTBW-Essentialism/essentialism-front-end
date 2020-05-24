@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SplashContainer, SplashTitle, SplashButton, ButtonLink } from "../main/Landing";
+import { LandingContainer, LandingTitle, LandingButton, ButtonLink } from "../main/Landing";
 import styled from "styled-components";
 import * as yup from "yup";
 import axios from "axios"
@@ -89,8 +89,8 @@ const handleSubmit = (e, setterCB) => {
     }
 
     return (
-        <SplashContainer>
-            <SplashTitle>essentialism</SplashTitle>
+        <LandingContainer>
+            <LandingTitle>essentialism</LandingTitle>
             <StyledForm onSubmit={e => {
                 handleSubmit(e, setFormState, formState);
             }}>
@@ -150,9 +150,9 @@ const handleSubmit = (e, setterCB) => {
                         }}
                     />
                 </StyledLabel>
-                <SplashButton>register</SplashButton>
+                <LandingButton>register</LandingButton>
             </StyledForm>
-        </SplashContainer>
+        </LandingContainer>
     );
 }
 

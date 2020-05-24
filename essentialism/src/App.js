@@ -6,10 +6,14 @@ import Landing from "./components/main/Landing";
 import Register from "./components/onboarding/Register";
 import Login from './components/onboarding/Login';
 import AreasOfFocus from "./components/main/AreasOfFocus";
+import Header from "./components/main/Header";
 
 function App() {
   return (
     <div className="App">
+      <Route path="/">
+        <Header />
+      </Route>
       <Route exact path="/">
         <Landing />
       </Route>
