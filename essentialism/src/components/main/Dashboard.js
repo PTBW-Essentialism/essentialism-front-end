@@ -5,7 +5,7 @@ import FocusTracker from "./FocusTracker";
 
 const DashboardContainer = styled.div`
     width: 24%;
-    height: 100%;
+    height: 100vw;
     background: #F8F8FF;
     font-family: 'Vibur', cursive;
     color: #8FCB9B;
@@ -21,6 +21,8 @@ const DashboardHeader = styled.div`
     line-height: 0.2;
     font-size: 1.25rem;
     margin: 2%;
+    width: 90%;
+    height: auto;
 `;
 
 const Dashboard = () => {
@@ -31,6 +33,8 @@ const Dashboard = () => {
                 <h2>essentialism</h2>
             </DashboardHeader>
             <FocusTracker focus="Focus 1" />
+            <FocusTracker focus="Focus 2" />
+            <FocusTracker focus="Focus 3" />
         </DashboardContainer>
     );
 }

@@ -9,14 +9,14 @@ export const LandingContainer = styled.div`
     justify-content: center;
     align-items: flex-start;
     background: #8FCB9B;
-    width: 500px;
-    height: 500px;
-    border-radius: 250px;
+    width: 50vw;
+    height: 50vw;
+    border-radius: 50%;
     margin: 7% auto;
 `;
 
 export const LandingTitle = styled.h1`
-    font-size: 6.5rem;
+    font-size: 11vw;
     font-family: 'Vibur', cursive;
     color: #F8F8FF;
     width: 100%;
