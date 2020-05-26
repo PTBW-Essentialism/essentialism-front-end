@@ -48,29 +48,27 @@ const Login = (props) => {
             <StyledForm onSubmit={e => {
                 handleSubmit(e, setFormState);
             }}>
-                <StyledLabel htmlFor="username">
-                    <StyledInput
-                        id="username"
-                        name="username"
-                        placeholder="enter username"
-                        value={formState.username}
-                        onChange={e => {
-                            handleChange(e, formState, setFormState);
-                        }}
-                    />
-                </StyledLabel>
-                <StyledLabel htmlFor="password">
-                    <StyledInput
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="enter password"
-                        value={formState.password}
-                        onChange={e => {
-                            handleChange(e, formState, setFormState);
-                        }}
-                    />
-                </StyledLabel>
+                <StyledLabel htmlFor="username">Username</StyledLabel>
+                <StyledInput
+                    id="username"
+                    name="username"
+                    placeholder="enter username"
+                    value={formState.username}
+                    onChange={e => {
+                        handleChange(e, formState, setFormState);
+                    }}
+                />
+                <StyledLabel htmlFor="password">Password</StyledLabel>
+                <StyledInput
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="enter password"
+                    value={formState.password}
+                    onChange={e => {
+                        handleChange(e, formState, setFormState);
+                    }}
+                />
                 <CustomButton type="onboard">login</CustomButton>
             </StyledForm>
         </LandingContainer>

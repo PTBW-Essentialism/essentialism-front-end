@@ -16,7 +16,7 @@ export const StyledForm = styled.form`
 `;
 
 export const StyledLabel = styled.label`
-
+    display: none;
 `;
 
 export const StyledInput = styled.input`
@@ -105,51 +105,47 @@ const handleSubmit = (e, setterCB) => {
                         handleChange(e, formState, setFormState);
                     }}
                 />
-                <StyledLabel htmlFor="lastName">
-                    <StyledInput
-                        id="lastName"
-                        name="lastName"
-                        placeholder="enter last name"
-                        value={formState.lastName}
-                        onChange={e => {
-                            handleChange(e, formState, setFormState);
-                        }}
-                    />
-                </StyledLabel>
-                <StyledLabel htmlFor="email">
-                    <StyledInput
-                        id="email"
-                        name="email"
-                        placeholder="enter email"
-                        value={formState.email}
-                        onChange={e => {
-                            handleChange(e, formState, setFormState);
-                        }}
-                    />
-                </StyledLabel>
-                <StyledLabel htmlFor="username">
-                    <StyledInput
-                        id="username"
-                        name="username"
-                        placeholder="enter username"
-                        value={formState.username}
-                        onChange={e => {
-                            handleChange(e, formState, setFormState);
-                        }}
-                    />
-                </StyledLabel>
-                <StyledLabel htmlFor="password">
-                    <StyledInput
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="enter password"
-                        value={formState.password}
-                        onChange={e => {
-                            handleChange(e, formState, setFormState);
-                        }}
-                    />
-                </StyledLabel>
+                <StyledLabel htmlFor="lastName">Last Name</StyledLabel>
+                <StyledInput
+                    id="lastName"
+                    name="lastName"
+                    placeholder="enter last name"
+                    value={formState.lastName}
+                    onChange={e => {
+                        handleChange(e, formState, setFormState);
+                    }}
+                />
+                <StyledLabel htmlFor="email">Email</StyledLabel>
+                <StyledInput
+                    id="email"
+                    name="email"
+                    placeholder="enter email"
+                    value={formState.email}
+                    onChange={e => {
+                        handleChange(e, formState, setFormState);
+                    }}
+                />
+                <StyledLabel htmlFor="username">Username</StyledLabel>
+                <StyledInput
+                    id="username"
+                    name="username"
+                    placeholder="enter username"
+                    value={formState.username}
+                    onChange={e => {
+                        handleChange(e, formState, setFormState);
+                    }}
+                />
+                <StyledLabel htmlFor="password">Password</StyledLabel>
+                <StyledInput
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="enter password"
+                    value={formState.password}
+                    onChange={e => {
+                        handleChange(e, formState, setFormState);
+                    }}
+                />
                 <CustomButton type="onboard">register</CustomButton>
             </StyledForm>
         </LandingContainer>
