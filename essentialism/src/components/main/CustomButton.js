@@ -27,6 +27,11 @@ export const CustomButton = styled.button`
         position: relative;
         top: -100px;
         padding: 0px;
-        margin: 0px;
+    ` : null)}
+
+    ${props => (props.type === "onboard" ? `
+        position: relative;
+        top: 5px;
+        left: 10px;
     ` : null)}
 `;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { LandingContainer, LandingTitle, LandingButton, ButtonLink } from "../main/Landing";
+import { LandingContainer, LandingTitle, ButtonLink } from "../main/Landing";
+import { CustomButton } from "../main/CustomButton";
 import styled from "styled-components";
 import * as yup from "yup";
 import axios from "axios"
@@ -94,17 +95,16 @@ const handleSubmit = (e, setterCB) => {
             <StyledForm onSubmit={e => {
                 handleSubmit(e, setFormState, formState);
             }}>
-                <StyledLabel htmlFor="firstName">
-                    <StyledInput
-                        id="firstName"
-                        name="firstName"
-                        placeholder="enter first name"
-                        value={formState.firstName}
-                        onChange={e => {
-                            handleChange(e, formState, setFormState);
-                        }}
-                    />
-                </StyledLabel>
+                <StyledLabel htmlFor="firstName"></StyledLabel>
+                <StyledInput
+                    id="firstName"
+                    name="firstName"
+                    placeholder="enter first name"
+                    value={formState.firstName}
+                    onChange={e => {
+                        handleChange(e, formState, setFormState);
+                    }}
+                />
                 <StyledLabel htmlFor="lastName">
                     <StyledInput
                         id="lastName"
@@ -150,7 +150,7 @@ const handleSubmit = (e, setterCB) => {
                         }}
                     />
                 </StyledLabel>
-                <LandingButton>register</LandingButton>
+                <CustomButton type="onboard">register</CustomButton>
             </StyledForm>
         </LandingContainer>
     );

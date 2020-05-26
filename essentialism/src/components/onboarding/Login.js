@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {axiosWithAuth} from "../../utils/AxiosWithAuth";
 import { LandingContainer, LandingTitle, LandingButton, ButtonLink } from "../main/Landing";
+import { CustomButton } from "../main/CustomButton";
 import styled from "styled-components";
 import * as yup from "yup";
 import { StyledForm, StyledLabel, StyledInput, handleChange, validate } from "../onboarding/Register";
@@ -70,7 +71,7 @@ const Login = (props) => {
                         }}
                     />
                 </StyledLabel>
-                <LandingButton>login</LandingButton>
+                <CustomButton type="onboard">login</CustomButton>
             </StyledForm>
         </LandingContainer>
     );
