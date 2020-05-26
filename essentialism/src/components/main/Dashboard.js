@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import AppLogo from "./AppLogo";
+import FocusTracker from "./FocusTracker";
 
 const DashboardContainer = styled.div`
     width: 24%;
@@ -11,6 +12,7 @@ const DashboardContainer = styled.div`
     border-right: 2px solid #8FCB9B;
     display: flex;
     flex-direction: column;
+    align-items: center;
 `;
 
 const DashboardHeader = styled.div`
@@ -28,6 +30,7 @@ const Dashboard = () => {
                 <AppLogo>es</AppLogo>
                 <h2>essentialism</h2>
             </DashboardHeader>
+            <FocusTracker focus="Focus 1" />
         </DashboardContainer>
     );
 }
