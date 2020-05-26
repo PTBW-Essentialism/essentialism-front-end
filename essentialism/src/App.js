@@ -7,21 +7,38 @@ import Register from "./components/onboarding/Register";
 import Login from './components/onboarding/Login';
 import AreasOfFocus from "./components/main/AreasOfFocus";
 import Header from "./components/main/Header";
+import styled from "styled-components";
+import Dashboard from "./components/main/Dashboard";
+
+const AppContainer = styled.div`
+  display: flex;
+  height: 100%;
+`;
+
+const MainContainer = styled.div`
+  width: 74%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <Route path="/">
-        <Header />
-      </Route>
-      <Route exact path="/">
-        <Landing />
-      </Route>
+    <AppContainer className="App">
+      <Dashboard />
+      <MainContainer>
+        <Route path="/">
+          <Header />
+        </Route>
+        <Route exact path="/">
+          <Landing />
+        </Route>
 
-      <Route path="/login" render ={(props) => <Login {...props} />} />
-      <Route path="/register" render ={(props) => <Register {...props} />} />
-      <PrivateRoute exact path="/users/:id/dashboard" component={AreasOfFocus} />
-    </div>
+        <Route path="/login" render ={(props) => <Login {...props} />} />
+        <Route path="/register" render ={(props) => <Register {...props} />} />
+        <PrivateRoute exact path="/users/:id/dashboard" component={AreasOfFocus} />
+      </MainContainer>
+    </AppContainer>
   );
 }
 

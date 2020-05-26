@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {axiosWithAuth} from "../../utils/AxiosWithAuth";
 import { LandingContainer, LandingTitle, LandingButton, ButtonLink } from "../main/Landing";
+import { CustomButton } from "../main/CustomButton";
 import styled from "styled-components";
 import * as yup from "yup";
 import { StyledForm, StyledLabel, StyledInput, handleChange, validate } from "../onboarding/Register";
@@ -47,30 +48,28 @@ const Login = (props) => {
             <StyledForm onSubmit={e => {
                 handleSubmit(e, setFormState);
             }}>
-                <StyledLabel htmlFor="username">
-                    <StyledInput
-                        id="username"
-                        name="username"
-                        placeholder="enter username"
-                        value={formState.username}
-                        onChange={e => {
-                            handleChange(e, formState, setFormState);
-                        }}
-                    />
-                </StyledLabel>
-                <StyledLabel htmlFor="password">
-                    <StyledInput
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="enter password"
-                        value={formState.password}
-                        onChange={e => {
-                            handleChange(e, formState, setFormState);
-                        }}
-                    />
-                </StyledLabel>
-                <LandingButton>login</LandingButton>
+                <StyledLabel htmlFor="username">Username</StyledLabel>
+                <StyledInput
+                    id="username"
+                    name="username"
+                    placeholder="enter username"
+                    value={formState.username}
+                    onChange={e => {
+                        handleChange(e, formState, setFormState);
+                    }}
+                />
+                <StyledLabel htmlFor="password">Password</StyledLabel>
+                <StyledInput
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="enter password"
+                    value={formState.password}
+                    onChange={e => {
+                        handleChange(e, formState, setFormState);
+                    }}
+                />
+                <CustomButton type="onboard">login</CustomButton>
             </StyledForm>
         </LandingContainer>
     );

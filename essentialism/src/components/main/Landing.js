@@ -29,22 +29,6 @@ export const ButtonLink = styled.a`
     margin: 0% 1% 10% 1%;
 `;
 
-export const LandingButton = styled.button`
-    width: 100%;
-    font-family: 'Vibur', cursive;
-    font-size: 2rem;
-    background-color: #F8F8FF;
-    border: 1px solid white;
-    border-radius: 20px;
-    padding: 5px;
-    color: #8FCB9B;
-
-    &:hover{
-        color: #5B9279;
-        background-color: white;
-    }
-`;
-
 const Landing = props => {
     return (
         <LandingContainer>

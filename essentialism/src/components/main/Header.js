@@ -14,7 +14,6 @@ const HeaderContainer = styled.div`
 const Header = () => {
     return(
         <HeaderContainer>
-            <AppLogo>es</AppLogo>
             <Link to="/profile">
                 <CustomButton>profile</CustomButton>
             </Link>
