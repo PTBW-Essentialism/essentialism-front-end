@@ -62,8 +62,12 @@ const OnboardingFocus = () => {
             });
     }, []);
 
+    const handleSubmit = () => {
+        console.log("Submitted!");
+    }
+
     return (
-        <FocusForm>
+        <FocusForm onSubmit={handleSubmit}>
             {focusState.map((focus, i) => {
                 return (
                     <CheckboxCard key={i}>
@@ -73,13 +77,18 @@ const OnboardingFocus = () => {
                                 type="checkbox"
                                 id={focus.name}
                                 name={focus.name}
+                                value={focusState[i].checked}
+                                onChange={e => {
+                                    focusState[i].checked = !focusState[i].checked;
+                                    console.log(focusState);
+                                }}
                             />
                         </CheckboxLabel>
                         <CheckboxBody>{focus.description}</CheckboxBody>
                     </CheckboxCard>
                 );
             })}
-            <CustomButton type="focusSelection">Submit</CustomButton>
+            <CustomButton type="submit" className="focusSelection">Submit</CustomButton>
         </FocusForm>
     );
 }
