@@ -23,6 +23,8 @@ const MainContainer = styled.div`
   align-items: center;
 `;
 
+//this is the app
+
 function App() {
   return (
     <AppContainer className="App">
