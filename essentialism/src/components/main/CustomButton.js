@@ -21,17 +21,18 @@ export const CustomButton = styled.button`
     ${props => (props.type === "landing" ? `
         font-size: 2.5rem;
         text-align: center;
-        height: 60px;
-        width: 130px;
+        width: 12vw;
+        height: auto;
         border-radius: 30px;
         position: relative;
-        top: -100px;
+        top: -10%;
         padding: 0px;
     ` : null)}
 
     ${props => (props.type === "onboard" ? `
         position: relative;
         top: 5px;
-        left: 10px;
+        left: 8px;
+        font-size: 2rem;
     ` : null)}
 `;
