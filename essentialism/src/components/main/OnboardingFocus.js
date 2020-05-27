@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-const AreasOfFocus = () => {
+const OnboardingFocus = () => {
     const [areasOfFocus, setAreasOfFocus] = useState([])
 
     useEffect(() => {
@@ -30,4 +30,4 @@ const AreasOfFocus = () => {
     )
 }
 
-export default AreasOfFocus
+export default OnboardingFocus
