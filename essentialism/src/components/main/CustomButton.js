@@ -35,4 +35,10 @@ export const CustomButton = styled.button`
         left: 8px;
         font-size: 2rem;
     ` : null)}
+
+    ${props => (props.type === "focusSelection" ? `
+        width: 25%;
+        font-size: 3vw;
+        margin: 2%;
+    ` : null)}
 `;

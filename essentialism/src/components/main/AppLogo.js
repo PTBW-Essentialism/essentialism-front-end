@@ -23,7 +23,7 @@ const CustomLink = styled.a`
 const AppLogo = () => {
     return(
         <CustomLink href="/">
-            <LogoStyling>es</LogoStyling>
+            <LogoStyling>e</LogoStyling>
         </CustomLink>
     );
 }

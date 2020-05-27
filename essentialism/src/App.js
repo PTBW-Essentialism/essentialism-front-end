@@ -9,6 +9,7 @@ import AreasOfFocus from "./components/main/AreasOfFocus";
 import Header from "./components/main/Header";
 import styled from "styled-components";
 import Dashboard from "./components/main/Dashboard";
+import OnboardingFocus from "./components/onboarding/OnboardingFocus";
 
 const AppContainer = styled.div`
   display: flex;
@@ -32,6 +33,9 @@ function App() {
         </Route>
         <Route exact path="/">
           <Landing />
+        </Route>
+        <Route exact path="/selection">
+          <OnboardingFocus />
         </Route>
 
         <Route path="/login" render ={(props) => <Login {...props} />} />
