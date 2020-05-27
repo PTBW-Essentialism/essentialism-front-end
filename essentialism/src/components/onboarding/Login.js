@@ -30,12 +30,12 @@ const Login = (props) => {
              .post('/auth/login', formState)
              .then((res) => {
                  console.log(res);
-                 console.log(res.data.token.userId);
+                 console.log(res.data.userId);
                  if (!window.localStorage.getItem('token')) {
                     window.localStorage.setItem('token', res.data.token)
-                    props.history.push(`/users/${res.data.token.userId}/dashboard`)
+                    props.history.push(`/focus`)
                 } else if (window.localStorage.getItem('token')) {
-                    props.history.push(`/users/${res.data.token.userId}/dashboard`)
+                    props.history.push(`/focus`)
                 }
              })
              .catch(err => console.log(err))
