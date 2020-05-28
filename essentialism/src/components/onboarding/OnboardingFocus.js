@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import {axiosWithAuth} from "../../utils/AxiosWithAuth"
 import { CustomButton } from "../main/CustomButton";
+import {connect} from "react-redux";
 
 const FocusForm = styled.div`
     display: flex;
@@ -47,7 +49,7 @@ const CheckboxBody = styled.p`
     text-align: center;
 `
 
-const OnboardingFocus = () => {
+const OnboardingFocus = (props) => {
     const [focusState, setFocusState] = useState([]);
 
     useEffect(() => {
@@ -70,7 +72,7 @@ const OnboardingFocus = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Submitted!");
+
     }
 
     return (
@@ -96,9 +98,15 @@ const OnboardingFocus = () => {
                     </CheckboxCard>
                 );
             })}
-            <CustomButton type="submit" className="focusSelection">Submit</CustomButton>
+            <CustomButton onClick={handleSubmit} type="submit" className="focusSelection">Submit</CustomButton>
         </FocusForm>
     );
 }
 
-export default OnboardingFocus;
+const mapStateToProps = (state) => {
+    return{
+        userId: state.userId
+    }
+}
+
+export default connect(mapStateToProps, {})(OnboardingFocus);

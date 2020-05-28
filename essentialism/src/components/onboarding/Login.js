@@ -15,6 +15,10 @@ const Login = (props) => {
         password: ""
     });
 
+    console.log(props.setUserId);
+
+    
+
     const handleSubmit = (e, setterCB) => {
         e.preventDefault();
 
@@ -32,7 +36,7 @@ const Login = (props) => {
              .then((res) => {
                  console.log(res);
 
-                 setUserId(res.data.userId)
+                 props.setUserId(res.data.userId)
 
                  if (!window.localStorage.getItem('token')) {
                     window.localStorage.setItem('token', res.data.token)

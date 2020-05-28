@@ -1,19 +1,21 @@
 import React from "react"
-import {GET_USER_ID, SET_USER_ID} from "./Types";
+import {SET_USER_ID} from "./Types";
 
 const initialState = {
-    userId: ""
+    userId: null
 }
 
-export const Reducer = (state = initialState, action) => {
+const Reducer = (state = initialState, action) => {
     console.log(action)
 
     switch(action.type) {
         case SET_USER_ID:
             return {
-                ...state, userId: action.payload
+                userId: action.payload
             }
-        case GET_USER_ID:
-            return state.userId
+
+        default: return state
     }
 }
+
+export default Reducer;
