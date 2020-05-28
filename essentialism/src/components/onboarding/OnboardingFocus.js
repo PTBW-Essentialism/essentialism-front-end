@@ -55,6 +55,7 @@ const OnboardingFocus = (props) => {
     useEffect(() => {
         axios.get("https://essentialapi.herokuapp.com/values")
             .then(res => {
+                console.log(res);
                 let focusArray = res.data.map(item => {
                     return {
                         id: item.id,
@@ -73,6 +74,15 @@ const OnboardingFocus = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        axiosWithAuth()
+        .post(`/users/${props.userId}/focus`, {userId: props.userId, valuesId: focusState[0].id})
+        .then((res) => {
+            console.log(res)
+            props.history.push(`https://essentialapi.herokuapp.com/users/${props.userId}/focus`)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     return (

@@ -15,8 +15,6 @@ const Login = (props) => {
         password: ""
     });
 
-    console.log(props.setUserId);
-
     
 
     const handleSubmit = (e, setterCB) => {
