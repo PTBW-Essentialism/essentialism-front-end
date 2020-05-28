@@ -64,7 +64,8 @@ const Register = (props) => {
         lastName: "",
         email: "",
         username: "",
-        password: ""
+        password: "",
+        role: "user"
     });
 
 
@@ -78,7 +79,8 @@ const handleSubmit = (e, setterCB) => {
         lastName: "",
         email: "",
         username: "",
-        password: ""
+        password: "",
+        role: "user"
     });
 }
 

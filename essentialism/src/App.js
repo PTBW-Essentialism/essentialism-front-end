@@ -43,6 +43,9 @@ function App() {
         <Route exact path="/initiatives">
           <Initiatives />
         </Route>
+        <Route exact path="/areas-of-focus">
+          <AreasOfFocus />
+        </Route>
 
         <Route path="/login" render ={(props) => <Login {...props} />} />
         <Route path="/register" render ={(props) => <Register {...props} />} />
