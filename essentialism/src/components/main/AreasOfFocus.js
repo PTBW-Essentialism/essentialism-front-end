@@ -2,8 +2,9 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 
 
-const AreasOfFocus = () => {
+const AreasOfFocus = (props) => {
     const [userFocus, setUserFocus] = useState([])
+    console.log(props.match.params);
 
     useEffect(() => {
         axios

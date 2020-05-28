@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import {axiosWithAuth} from "../../utils/AxiosWithAuth"
 import { CustomButton } from "../main/CustomButton";
-import { Redirect } from "react-router";
+import {connect} from "react-redux";
 
 const FocusForm = styled.div`
     display: flex;
@@ -48,12 +49,13 @@ const CheckboxBody = styled.p`
     text-align: center;
 `
 
-const OnboardingFocus = () => {
+const OnboardingFocus = (props) => {
     const [focusState, setFocusState] = useState([]);
 
     useEffect(() => {
         axios.get("https://essentialapi.herokuapp.com/values")
             .then(res => {
+                console.log(res);
                 let focusArray = res.data.map(item => {
                     return {
                         id: item.id,
@@ -71,7 +73,16 @@ const OnboardingFocus = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Submitted!");
+
+        axiosWithAuth()
+        .post(`/users/${props.userId}/focus`, {userId: props.userId, valuesId: focusState[0].id})
+        .then((res) => {
+            console.log(res)
+            props.history.push(`https://essentialapi.herokuapp.com/users/${props.userId}/focus`)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     return (
@@ -97,9 +108,15 @@ const OnboardingFocus = () => {
                     </CheckboxCard>
                 );
             })}
-            <CustomButton type="submit" className="focusSelection">Submit</CustomButton>
+            <CustomButton onClick={handleSubmit} type="submit" className="focusSelection">Submit</CustomButton>
         </FocusForm>
     );
 }
 
-export default OnboardingFocus;
+const mapStateToProps = (state) => {
+    return{
+        userId: state.userId
+    }
+}
+
+export default connect(mapStateToProps, {})(OnboardingFocus);

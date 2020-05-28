@@ -5,7 +5,8 @@ import { CustomButton } from "../main/CustomButton";
 import styled from "styled-components";
 import * as yup from "yup";
 import { StyledForm, StyledLabel, StyledInput, handleChange, validate } from "../onboarding/Register";
-import {Redirect} from "react-router-dom";
+import {connect} from "react-redux";
+import {setUserId} from "../../state/Actions";
 
 
 const Login = (props) => {
@@ -13,6 +14,8 @@ const Login = (props) => {
         username: "",
         password: ""
     });
+
+    
 
     const handleSubmit = (e, setterCB) => {
         e.preventDefault();
@@ -30,7 +33,9 @@ const Login = (props) => {
              .post('/auth/login', formState)
              .then((res) => {
                  console.log(res);
-                 console.log(res.data.userId);
+
+                 props.setUserId(res.data.userId)
+
                  if (!window.localStorage.getItem('token')) {
                     window.localStorage.setItem('token', res.data.token)
                     props.history.push(`/focus`)
@@ -75,4 +80,4 @@ const Login = (props) => {
     );
 }
 
-export default Login;
+export default connect(null, {setUserId})(Login);
