@@ -21,7 +21,9 @@ const InitiativeList = styled.div`
 const InitiativeCard = styled.div`
     border: 1px solid black;
     width: 60vw;
+    box-sizing: border-box;
     margin: 2%;
+    padding: 2%;
 `
 
 const StyledTextArea = styled.textarea`
@@ -72,11 +74,18 @@ const Initiatives = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Submitted!");
+        axios.post("https://essentialapi.herokuapp.com/users/:id/initiatives", formState)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     const markComplete = () => {
         console.log("Task complete!");
+        //this should delete the initiative card and delete the initiative from the backend
     }
 
     return (
@@ -120,13 +129,13 @@ const Initiatives = () => {
                         id="dueDate"
                         name="dueDate"
                     />
-                    <CustomButton>Submit</CustomButton>
+                    <CustomButton onSubmit={handleSubmit}>Submit</CustomButton>
                 </StyledForm>
             </InitiativeAdder>
             <InitiativeList>
                 {userInitiatives.map((item, i) => {
                     return (
-                        <InitiativeCard>
+                        <InitiativeCard key={i}> {/* should this use Date.now()? */}
                             <h3>{userInitiatives[i].iName}</h3>
                             <h4>Relevent focus: {userInitiatives[i].userValuesID}</h4>
                             <p>{userInitiatives[i].iDescription}</p>
