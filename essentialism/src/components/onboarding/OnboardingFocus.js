@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { CustomButton } from "../main/CustomButton";
-import { Redirect } from "react-router";
 
 const FocusForm = styled.div`
     display: flex;

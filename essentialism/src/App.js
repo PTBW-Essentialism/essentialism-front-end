@@ -46,8 +46,8 @@ function App() {
 
         <Route path="/login" render ={(props) => <Login {...props} />} />
         <Route path="/register" render ={(props) => <Register {...props} />} />
+        <Route exact path="/focus" component={OnboardingFocus} />
         <PrivateRoute exact path="/users/:id/focus" component={AreasOfFocus} />
-        <PrivateRoute exact path="/focus" component={OnboardingFocus} />
       </MainContainer>
     </AppContainer>
   );
