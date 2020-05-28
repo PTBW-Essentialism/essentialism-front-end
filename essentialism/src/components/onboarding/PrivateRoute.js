@@ -13,14 +13,10 @@ Private Route Rules
 const PrivateRoute = ({component: Component, ...rest}) => {
     const token = window.localStorage.getItem('token')
     return(
-        // Remember FOR EACH ROUTE YOU CAN ONLY HAVE 1 OF TYPE RENDER OR COMPONENT
-        // this is why we use rest operator here
         <Route {...rest} render={(props) => {
             if (token) {
-                // return the component
                 return <Component {...props} />
             } else {
-                // redirects the user to login
                 return <Redirect to="/" />
             }
         }} />
