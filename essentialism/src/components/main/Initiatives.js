@@ -39,29 +39,26 @@ const Initiatives = () => {
         repeatable: false
     }])
     
-    // useEffect(() => {
-    //     axios.get("https://essentialapi.herokuapp.com/users/:id/initiatives/")
-    //         .then(res => {
-    //             console.log(res) //get the number of initiatives here?
-    //         })
-    //         .catch(err => {
-    //             console.log(err)
-    //         });
-    // }, []);
-
-    // useEffect(() => {
-    //     axios.get("https://essentialapi.herokuapp.com/users/:id/initiatives/:id")
-    //         .then(res => {
-    //             let initiativesArray = res.data.map(item => { //set userInitiatives state here
-    //                 return {
-
-    //                 }
-    //             })
-    //         })
-    //         .catch(err => {
-    //             console.log(err)
-    //         });
-    // }, []);
+    useEffect(() => {
+        axios.get("https://essentialapi.herokuapp.com/users/:id/initiatives")
+            .then(res => {
+                let initiativesArray = res.data.map(item => {
+                    return {
+                        iName: res.data.iName,
+                        iDescription: res.data.iDescription,
+                        dueDate: res.data.dueDate,
+                        userID: res.data.userID,
+                        userValuesID: res.data.userValuesID,
+                        completed: res.data.completed,
+                        repeatable: res.data.repeatable
+                    }
+                });
+                setUserInitiatives([...initiativesArray]);
+            })
+            .catch(err => {
+                console.log(err)
+            });
+    }, []);
     
     const [formState, setFormState] = useState({
         iName: "",
@@ -78,7 +75,9 @@ const Initiatives = () => {
         console.log("Submitted!");
     }
 
-    console.log(userInitiatives);
+    const markComplete = () => {
+        console.log("Task complete!");
+    }
 
     return (
         <div>
@@ -129,9 +128,10 @@ const Initiatives = () => {
                     return (
                         <InitiativeCard>
                             <h3>{userInitiatives[i].iName}</h3>
+                            <h4>Relevent focus: {userInitiatives[i].userValuesID}</h4>
                             <p>{userInitiatives[i].iDescription}</p>
                             <p>Due: {userInitiatives[i].dueDate}</p>
-                            <button>Mark as complete</button>
+                            <button onClick={markComplete}>Mark as complete</button>
                         </InitiativeCard>
                     );
                 })}
