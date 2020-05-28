@@ -29,6 +29,13 @@ const CheckboxHeader = styled.input`
 
 `
 
+const FormHeading = styled.h1`
+    font-family: 'Josefin Slab', serif;
+    color: #8FCB9B;
+    font-size: 3vw;
+    width: 100%;
+`
+
 const CheckboxLabel = styled.label`
     font-size: 2.5vw;
     color: #8FCB9B;
@@ -62,12 +69,14 @@ const OnboardingFocus = () => {
             });
     }, []);
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         console.log("Submitted!");
     }
 
     return (
         <FocusForm onSubmit={handleSubmit}>
+            <FormHeading>Please pick your top three areas of focus!</FormHeading>
             {focusState.map((focus, i) => {
                 return (
                     <CheckboxCard key={i}>
