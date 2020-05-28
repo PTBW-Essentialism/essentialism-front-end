@@ -69,7 +69,8 @@ const OnboardingFocus = () => {
             });
     }, []);
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         console.log("Submitted!");
     }
 

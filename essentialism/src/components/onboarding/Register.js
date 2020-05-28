@@ -13,6 +13,11 @@ export const StyledForm = styled.form`
     align-items: space-evenly;
     position: relative;
     top: -150px;
+
+    ${props => (props.type === "initiative" ? `
+        top: 0px;
+        width: 80%;
+    ` : null)}
 `;
 
 export const StyledLabel = styled.label`
