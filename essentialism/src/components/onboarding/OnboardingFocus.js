@@ -73,16 +73,25 @@ const OnboardingFocus = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        handlePost(focusState)
+    }
 
-        axiosWithAuth()
-        .post(`/users/${props.userId}/focus`, {userId: props.userId, valuesId: focusState[0].id})
-        .then((res) => {
-            console.log(res)
-            props.history.push(`https://essentialapi.herokuapp.com/users/${props.userId}/focus`)
+    const handlePost = (state) => {
+        state.map((item) => {
+            if (item.checked === true) {
+                axiosWithAuth()
+                .post(`/users/${props.userId}/focus`, {userId: props.userId, valuesId: item.id})
+                .then((res) => {
+                    console.log(res)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+            }
+            return null;
         })
-        .catch((err) => {
-            console.log(err)
-        })
+
+        props.history.push(`/users/${props.userId}/focus`)
     }
 
     return (
