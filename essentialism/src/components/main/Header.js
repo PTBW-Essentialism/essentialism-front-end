@@ -17,7 +17,7 @@ const Header = () => {
             <Link to="/initiatives">
                 <CustomButton>initiatives</CustomButton>
             </Link>
-            <Link to="areas-of-focus">
+            <Link to="/users/:id/focus"> {/* This url needs to have the id being filled in */}
                 <CustomButton>areas of focus</CustomButton>
             </Link>
         </HeaderContainer>
