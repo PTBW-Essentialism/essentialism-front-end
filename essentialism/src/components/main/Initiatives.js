@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { StyledForm, StyledLabel, StyledInput, handleChange } from "../onboarding/Register";
+import { StyledForm, StyledLabel, StyledInput} from "../onboarding/Register";
 import { CustomButton } from "./CustomButton";
 import axios from "axios";
 import {axiosWithAuth} from "../../utils/AxiosWithAuth";
@@ -73,7 +73,7 @@ const Initiatives = (props) => {
 
     useEffect(() => {
         axiosWithAuth()
-            .get(`/users/${USERID || props.userId}/initiatives`)
+            .get(`/users/${USERID}/initiatives`)
             .then(res => {
                 console.log(res);
                 if (res.data.length) {
@@ -87,7 +87,7 @@ const Initiatives = (props) => {
 
     const initiativesPost = () => {
         axiosWithAuth()
-            .get(`/users/${USERID || props.userId}/initiatives`)
+            .get(`/users/${USERID}/initiatives`)
             .then(res => {
                 console.log(res);
                 if (res.data.length) {
@@ -101,7 +101,7 @@ const Initiatives = (props) => {
 
     useEffect(() => {
         axiosWithAuth()
-            .get(`/users/${USERID || props.userId}/focus`)
+            .get(`/users/${USERID}/focus`)
             .then(res => {
                 setUserFocus(res.data);
             })
@@ -114,8 +114,8 @@ const Initiatives = (props) => {
         iName: "",
         iDescription: "",
         dueDate: "",
-        userID: undefined,
-        userValuesID: undefined,
+        userId: undefined,
+        userValuesId: undefined,
         completed: false,
         repeatable: false
     });
@@ -123,7 +123,7 @@ const Initiatives = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axiosWithAuth()
-        .post(`/users/${USERID || props.userId}/initiatives`, formState)
+        .post(`/users/${USERID}/initiatives`, formState)
             .then(res => {
                 console.log(res);
                 initiativesPost()
@@ -136,12 +136,19 @@ const Initiatives = (props) => {
             iName: "",
             iDescription: "",
             dueDate: "",
-            userID: undefined,
-            userValuesID: undefined,
+            userId: undefined,
+            userValuesId: undefined,
             completed: false,
             repeatable: false
         });
         window.location.reload(true);
+    }
+
+    const handleChange = (e) => {
+        setFormState({
+            ...formState,
+            [e.target.name]: e.target.value,
+        })
     }
 
     const InitiativeList = () => {
@@ -166,7 +173,7 @@ const Initiatives = (props) => {
 
     const markComplete = (id) => {
         console.log("Task complete!");
-        axios.delete(`https://essentialapi.herokuapp.com/users/${USERID || props.userId}/initiatives/${id}`)
+        axios.delete(`https://essentialapi.herokuapp.com/users/${USERID}/initiatives/${id}`)
             .then(res => {
                 console.log(res);
             })
@@ -189,16 +196,16 @@ const Initiatives = (props) => {
                         placeholder="initiative title"
                         value={formState.iName}
                         onChange={e => {
-                            handleChange(e, formState, setFormState);
+                            handleChange(e);
                         }}
                         />
                     <StyledLabel htmlFor="userValuesID">Relevent focus</StyledLabel>
                     <select
-                        id="userValuesID"
-                        name="userValuesID"
+                        id="userValuesId"
+                        name="userValuesId"
                         value={formState.userValuesID}
                         onChange={e => {
-                            handleChange(e, formState, setFormState);
+                            handleChange(e);
                         }}
                     >
                         <option value={0}>Please select a relevent focus</option>
@@ -214,7 +221,7 @@ const Initiatives = (props) => {
                         placeholder="initiative description"
                         value={formState.iDescription}
                         onChange={e => {
-                            handleChange(e, formState, setFormState);
+                            handleChange(e);
                         }}
                         />
                     <StyledLabel htmlFor="dueDate"></StyledLabel>
@@ -224,7 +231,7 @@ const Initiatives = (props) => {
                         name="dueDate"
                         value={formState.dueDate}
                         onChange={e => {
-                            handleChange(e, formState, setFormState);
+                            handleChange(e);
                         }}
                         />
                     <CustomButton onSubmit={handleSubmit}>Submit</CustomButton>
