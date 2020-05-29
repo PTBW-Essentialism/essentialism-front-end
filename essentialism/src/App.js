@@ -42,15 +42,18 @@ function App(props) {
           <Header />
           <Initiatives />
         </Route>
-        <Route exact path="/areas-of-focus">
-          <Header />
-          <AreasOfFocus />
-        </Route>
 
         <Route path="/login" render ={(props) => <Login {...props} />} />
         <Route path="/register" render ={(props) => <Register {...props} />} />
         <Route exact path="/focus" component={OnboardingFocus} />
-        <PrivateRoute exact path="/users/:id/focus" component={AreasOfFocus} />
+        <PrivateRoute exact path="/users/:id/focus">
+          <Header />
+          <AreasOfFocus />
+        </PrivateRoute>
+        <PrivateRoute exact path="/users/:id/initiatives">
+          <Header />
+          <Initiatives /> {/* need to pass in a user id prop here? */}
+        </PrivateRoute>
       </MainContainer>
     </AppContainer>
   );

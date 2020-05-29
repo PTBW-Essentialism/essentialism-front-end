@@ -30,31 +30,45 @@ const StyledTextArea = styled.textarea`
 
 `
 
-const Initiatives = () => {
-    const [userInitiatives, setUserInitiatives] = useState();
-        // iName: "Dummy Data",
-        // iDescription: "This isn't real data.",
-        // dueDate: "Never",
-        // userId: 1,
-        // userValuesId: 1,
-        // completed: false,
-        // repeatable: false
+const Initiatives = (props) => {
+    const [userInitiatives, setUserInitiatives] = useState([]);
+    const dummyData = [
+        {
+            id: 1,
+            iName: "Dummy Data",
+            iDescription: "This isn't real data.",
+            dueDate: "Never",
+            userId: 1,
+            userValuesId: 1,
+            completed: false,
+            repeatable: false
+        },
+        {
+            id: 2,
+            iName: "Dummy Data 2",
+            iDescription: "This also isn't real data.",
+            dueDate: "Never",
+            userId: 1,
+            userValuesId: 1,
+            completed: false,
+            repeatable: false
+        },
+        {
+            id: 3,
+            iName: "Dummy Data 3",
+            iDescription: "This also isn't real data.",
+            dueDate: "Never",
+            userId: 1,
+            userValuesId: 1,
+            completed: false,
+            repeatable: false
+        },
+    ];
     
     useEffect(() => {
-        axios.get("https://essentialapi.herokuapp.com/users/:id/initiatives")
+        axios.get(`https://essentialapi.herokuapp.com/users/:id/initiatives`)
             .then(res => {
-                let initiativesArray = res.data.map(item => {
-                    return {
-                        iName: res.data.iName,
-                        iDescription: res.data.iDescription,
-                        dueDate: res.data.dueDate,
-                        userId: res.data.userID,
-                        userValuesID: res.data.userValuesID,
-                        completed: res.data.completed,
-                        repeatable: res.data.repeatable
-                    }
-                });
-                setUserInitiatives([...initiativesArray]);
+                setUserInitiatives(res.data);
             })
             .catch(err => {
                 console.log(err)
@@ -62,6 +76,7 @@ const Initiatives = () => {
     }, []);
     
     const [formState, setFormState] = useState({
+        id: undefined, //how to set this to the initiative id?
         iName: "",
         iDescription: "",
         dueDate: "",
@@ -73,18 +88,34 @@ const Initiatives = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("https://essentialapi.herokuapp.com/users/:id/initiatives", formState)
+        axios.post(`https://essentialapi.herokuapp.com/users/:id/initiatives`, formState)
             .then(res => {
                 console.log(res);
             })
             .catch(err => {
                 console.log(err);
             });
+        setFormState({
+            id: undefined,
+            iName: "",
+            iDescription: "",
+            dueDate: "",
+            userID: undefined,
+            userValuesID: undefined,
+            completed: false,
+            repeatable: false
+        });
     }
 
-    const markComplete = () => {
+    const markComplete = (id) => {
         console.log("Task complete!");
-        //this should delete the initiative card and delete the initiative from the backend
+        axios.delete(`https://essentialapi.herokuapp.com/users/${props.userId}/initiatives/${id}`)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     return (
@@ -111,6 +142,7 @@ const Initiatives = () => {
                             handleChange(e, formState, setFormState);
                         }}
                     >
+                        <option value={0}>Please select a relevent focus</option>
                         <option value={1}>Focus 1</option>
                         <option value={2}>Focus 2</option>
                         <option value={3}>Focus 3</option>
@@ -121,6 +153,7 @@ const Initiatives = () => {
                         id="iDescription"
                         name="iDescription"
                         placeholder="initiative description"
+                        value={formState.iDescription}
                         onChange={e => {
                             handleChange(e, formState, setFormState);
                         }}
@@ -139,15 +172,21 @@ const Initiatives = () => {
                 </StyledForm>
             </InitiativeAdder>
             <InitiativeList>
-                {userInitiatives.map((item, i) => {
+                {dummyData.map((item, i) => {
                     return (
-                        <InitiativeCard key={i}> {/* should this use Date.now()? */}
-                            <h3>{userInitiatives[i].iName}</h3>
-                            <h4>Relevent focus: {userInitiatives[i].userValuesID}</h4>
-                            <p>{userInitiatives[i].iDescription}</p>
-                            <p>Due: {userInitiatives[i].dueDate}</p>
-                            <button onClick={markComplete}>Mark as complete</button>
-                        </InitiativeCard>
+                        <InitiativeCard key={i}>
+                            <h3>{dummyData[i].iName}</h3>
+                            <h4>Relevent focus: {dummyData[i].userValuesID}</h4>
+                            <p>{dummyData[i].iDescription}</p>
+                            <p>Due: {dummyData[i].dueDate}</p>
+                            <button
+                                onClick={() => {
+                                    markComplete(dummyData.id);
+                                }}
+                            >
+                                Mark as complete
+                            </button>
+        </InitiativeCard>
                     );
                 })}
             </InitiativeList>
@@ -156,3 +195,19 @@ const Initiatives = () => {
 }
 
 export default Initiatives;
+
+// {dummyData.map((item, i) => {
+//     {const markComplete = () => {
+
+//     return (
+//         <InitiativeCard key={i}>
+//             <h3>{dummyData[i].iName}</h3>
+//             <h4>Relevent focus: {dummyData[i].userValuesID}</h4>
+//             <p>{dummyData[i].iDescription}</p>
+//             <p>Due: {dummyData[i].dueDate}</p>
+//             <button onClick={() =>{
+//                 markComplete(dummyData.id);
+//             }}>Mark as complete</button>
+//         </InitiativeCard>
+//     );
+// }}})}
