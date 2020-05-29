@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import FocusTracker from "./FocusTracker";
 import styled from "styled-components";
+import {connect} from "react-redux";
 
 const FocusWrapper = styled.div`
     display: flex;
@@ -11,11 +12,10 @@ const FocusWrapper = styled.div`
 
 const AreasOfFocus = (props) => {
     const [userFocus, setUserFocus] = useState([])
-    //console.log(props.match.params);
 
     useEffect(() => {
         axios
-        .get('https://essentialapi.herokuapp.com/users/:id/focus')
+        .get(`https://essentialapi.herokuapp.com/users/${props.userId}/focus`)
         .then((res) => {
             console.log(res)
         })
@@ -46,4 +46,10 @@ const AreasOfFocus = (props) => {
 
 }
 
-export default AreasOfFocus;
+const mapStateToProps = (state) => {
+    return{
+        userId: state.userId
+    }
+}
+
+export default connect(mapStateToProps, {})(AreasOfFocus);
