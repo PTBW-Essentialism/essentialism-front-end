@@ -99,6 +99,15 @@ const OnboardingFocus = (props) => {
         props.history.push(`/users/${props.userId}/focus`)
     }
 
+    const checkCounter = (i) => {
+            const tempFocusState = [...focusState];
+            tempFocusState[i].checked = !tempFocusState[i].checked;
+            setFocusState(tempFocusState);
+            if (focusState[i].checked) checkCount++;
+            else checkCount--;
+            console.log(focusState);
+    }
+
     return (
         <FocusForm onSubmit={handleSubmit}>
             <FormHeading>Please pick your top three areas of focus!</FormHeading>
@@ -113,12 +122,7 @@ const OnboardingFocus = (props) => {
                                 name={focus.name}
                                 value={focusState[i].checked}
                                 onChange={() => {
-                                    const tempFocusState = [...focusState];
-                                    tempFocusState[i].checked = !tempFocusState[i].checked;
-                                    setFocusState(tempFocusState);
-                                    if (focusState[i].checked) checkCount++;
-                                    else checkCount--;
-                                    console.log(focusState);
+                                    checkCounter(i);
                                 }}
                             />
                         </CheckboxLabel>
