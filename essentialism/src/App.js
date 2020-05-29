@@ -32,7 +32,7 @@ function App(props) {
     <AppContainer className="App">
       {props.userId ? <Dashboard /> : null}
       <MainContainer>
-        <Route exact path="/landing">
+        <Route exact path="/">
           <Landing />
         </Route>
         <Route exact path="/selection">
