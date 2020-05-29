@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { StyledForm, StyledLabel, StyledInput, handleChange } from "../onboarding/Register";
 import { CustomButton } from "./CustomButton";
 import axios from "axios";
+import {axiosWithAuth} from "../../utils/AxiosWithAuth";
 import { connect } from "react-redux";
 
 const InitiativeAdder = styled.div`
@@ -31,7 +32,7 @@ const StyledTextArea = styled.textarea`
 
 `
 
-const Initiatives = ({userId}) => {
+const Initiatives = (props) => {
     const [userInitiatives, setUserInitiatives] = useState();
     const [userFocus, setUserFocus] = useState();
     const dummyData = [
@@ -68,8 +69,10 @@ const Initiatives = ({userId}) => {
     ];
     
     useEffect(() => {
-        axios.get(`https://essentialapi.herokuapp.com/users/${userId}/initiatives`)
+        axiosWithAuth()
+            .get(`/users/${props.userId}/initiatives`)
             .then(res => {
+                console.log(res);
                 setUserInitiatives(res.data);
             })
             .catch(err => {
@@ -78,7 +81,8 @@ const Initiatives = ({userId}) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`https://essentialapi.herokuapp.com/users/${userId}/focus`)
+        axiosWithAuth()
+            .get(`/users/${props.userId}/focus`)
             .then(res => {
                 setUserFocus(res.data);
             })
@@ -100,7 +104,8 @@ const Initiatives = ({userId}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(`https://essentialapi.herokuapp.com/users/${userId}/initiatives`, formState)
+        axiosWithAuth()
+        .post(`/users/${props.userId}/initiatives`, formState)
             .then(res => {
                 console.log(res);
             })
@@ -121,7 +126,7 @@ const Initiatives = ({userId}) => {
 
     const markComplete = (id) => {
         console.log("Task complete!");
-        axios.delete(`https://essentialapi.herokuapp.com/users/${userId}/initiatives/${id}`)
+        axios.delete(`https://essentialapi.herokuapp.com/users/${props.userId}/initiatives/${id}`)
             .then(res => {
                 console.log(res);
             })
@@ -132,7 +137,9 @@ const Initiatives = ({userId}) => {
 
     return (
         <div>
-            <InitiativeAdder>
+            {userFocus ?
+            <div>
+                <InitiativeAdder>
                 <StyledForm type="initiative" onSubmit={handleSubmit}>
                     <h2>New Initiative</h2>
                     <StyledLabel htmlFor="iName">Initiative name</StyledLabel>
@@ -144,7 +151,7 @@ const Initiatives = ({userId}) => {
                         onChange={e => {
                             handleChange(e, formState, setFormState);
                         }}
-                    />
+                        />
                     <StyledLabel htmlFor="userValuesID">Relevent focus</StyledLabel>
                     <select
                         id="userValuesID"
@@ -169,7 +176,7 @@ const Initiatives = ({userId}) => {
                         onChange={e => {
                             handleChange(e, formState, setFormState);
                         }}
-                    />
+                        />
                     <StyledLabel htmlFor="dueDate"></StyledLabel>
                     <StyledInput
                         type="date"
@@ -179,29 +186,31 @@ const Initiatives = ({userId}) => {
                         onChange={e => {
                             handleChange(e, formState, setFormState);
                         }}
-                    />
+                        />
                     <CustomButton onSubmit={handleSubmit}>Submit</CustomButton>
                 </StyledForm>
-            </InitiativeAdder>
-            <InitiativeList>
-                {dummyData.map((item, i) => {
-                    return (
-                        <InitiativeCard key={i}>
-                            <h3>{userInitiatives[i].iName}</h3>
-                            <h4>Relevent focus: {userInitiatives[i].userValuesID}</h4>
-                            <p>{userInitiatives[i].iDescription}</p>
-                            <p>Due: {userInitiatives[i].dueDate}</p>
-                            <button
-                                onClick={() => {
-                                    markComplete(userInitiatives.id);
-                                }}
-                            >
-                                Mark as complete
-                            </button>
-        </InitiativeCard>
-                    );
-                })}
-            </InitiativeList>
+                </InitiativeAdder>
+                <InitiativeList>
+                    {dummyData.map((item, i) => {
+                        return (
+                            <InitiativeCard key={i}>
+                                <h3>{userInitiatives[i].iName}</h3>
+                                <h4>Relevent focus: {userInitiatives[i].userValuesID}</h4>
+                                <p>{userInitiatives[i].iDescription}</p>
+                                <p>Due: {userInitiatives[i].dueDate}</p>
+                                <button
+                                    onClick={() => {
+                                        markComplete(userInitiatives.id);
+                                    }}
+                                    >
+                                    Mark as complete
+                                </button>
+                            </InitiativeCard>
+                        );
+                    })}
+                </InitiativeList>
+            </div>
+            : null}
         </div>
     );
 }
