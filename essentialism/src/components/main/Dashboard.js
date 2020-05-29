@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import AppLogo from "./AppLogo";
 import FocusTracker from "./FocusTracker";
+import { axiosWithAuth } from "../../utils/AxiosWithAuth";
 
 const DashboardContainer = styled.div`
     width: 24%;
@@ -25,16 +26,30 @@ const DashboardHeader = styled.div`
     height: auto;
 `;
 
-const Dashboard = () => {
+const Dashboard = ({userId}) => {
+    const [userFocus, setUserFocus] = useState();
+
+    useEffect(() => {
+        axiosWithAuth()
+        .get(`https://essentialapi.herokuapp.com/users/${userId}/focus`)
+        .then((res) => {
+            console.log(res)
+            setUserFocus(res.data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }, [])
+
     return(
         <DashboardContainer>
             <DashboardHeader>
                 <AppLogo>es</AppLogo>
                 <h2>essentialism</h2>
             </DashboardHeader>
-            <FocusTracker focus="Focus 1" />
-            <FocusTracker focus="Focus 2" />
-            <FocusTracker focus="Focus 3" />
+            <FocusTracker focus="1" />
+            <FocusTracker focus="2" />
+            <FocusTracker focus="3" />
         </DashboardContainer>
     );
 }

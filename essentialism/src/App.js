@@ -30,7 +30,7 @@ const MainContainer = styled.div`
 function App(props) {
   return (
     <AppContainer className="App">
-      {props.userId ? <Dashboard /> : null}
+      {props.userId ? <Dashboard userId={props.userId}/> : null}
       <MainContainer>
         <Route exact path="/">
           <Landing />
@@ -47,12 +47,12 @@ function App(props) {
         <Route path="/register" render ={(props) => <Register {...props} />} />
         <Route exact path="/focus" component={OnboardingFocus} />
         <PrivateRoute exact path="/users/:id/focus">
-          <Header />
+          <Header /> {/* need to pass in a user id prop here */}
           <AreasOfFocus />
         </PrivateRoute>
         <PrivateRoute exact path="/users/:id/initiatives">
           <Header />
-          <Initiatives /> {/* need to pass in a user id prop here? */}
+          <Initiatives userId={props.userId} /> {/* need to pass in a user id prop here */}
         </PrivateRoute>
       </MainContainer>
     </AppContainer>

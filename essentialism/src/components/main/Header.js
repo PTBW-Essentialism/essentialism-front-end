@@ -14,7 +14,7 @@ const HeaderContainer = styled.div`
 const Header = () => {
     return(
         <HeaderContainer>
-            <Link to="/initiatives">
+            <Link to="/users/:id/initiatives">
                 <CustomButton>initiatives</CustomButton>
             </Link>
             <Link to="/users/:id/focus"> {/* This url needs to have the id being filled in */}
