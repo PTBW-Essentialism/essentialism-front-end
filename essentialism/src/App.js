@@ -50,7 +50,7 @@ function App(props) {
           <Header /> {/* need to pass in a user id prop here */}
           <AreasOfFocus />
         </PrivateRoute>
-        <PrivateRoute exact path="/users/:id/initiatives">
+        <PrivateRoute path="/users/:id/initiatives">
           <Header />
           <Initiatives userId={props.userId} /> {/* need to pass in a user id prop here */}
         </PrivateRoute>

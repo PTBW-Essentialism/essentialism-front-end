@@ -54,6 +54,7 @@ const Login = (props) => {
                  console.log(res);
                  props.setUserId(res.data.userId)
                  userRouter(res.data.userId);
+                 window.localStorage.setItem("userId", res.data.userId)
              })
              .catch(err => console.log(err))
     }
