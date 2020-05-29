@@ -31,15 +31,14 @@ const StyledTextArea = styled.textarea`
 `
 
 const Initiatives = () => {
-    const [userInitiatives, setUserInitiatives] = useState([{
-        iName: "Dummy Data",
-        iDescription: "This isn't real data.",
-        dueDate: "Never",
-        userID: 1,
-        userValuesID: 1,
-        completed: false,
-        repeatable: false
-    }])
+    const [userInitiatives, setUserInitiatives] = useState();
+        // iName: "Dummy Data",
+        // iDescription: "This isn't real data.",
+        // dueDate: "Never",
+        // userId: 1,
+        // userValuesId: 1,
+        // completed: false,
+        // repeatable: false
     
     useEffect(() => {
         axios.get("https://essentialapi.herokuapp.com/users/:id/initiatives")
@@ -49,7 +48,7 @@ const Initiatives = () => {
                         iName: res.data.iName,
                         iDescription: res.data.iDescription,
                         dueDate: res.data.dueDate,
-                        userID: res.data.userID,
+                        userId: res.data.userID,
                         userValuesID: res.data.userValuesID,
                         completed: res.data.completed,
                         repeatable: res.data.repeatable
@@ -122,12 +121,19 @@ const Initiatives = () => {
                         id="iDescription"
                         name="iDescription"
                         placeholder="initiative description"
+                        onChange={e => {
+                            handleChange(e, formState, setFormState);
+                        }}
                     />
                     <StyledLabel htmlFor="dueDate"></StyledLabel>
                     <StyledInput
                         type="date"
                         id="dueDate"
                         name="dueDate"
+                        value={formState.dueDate}
+                        onChange={e => {
+                            handleChange(e, formState, setFormState);
+                        }}
                     />
                     <CustomButton onSubmit={handleSubmit}>Submit</CustomButton>
                 </StyledForm>

@@ -11,6 +11,7 @@ import Header from "./components/main/Header";
 import styled from "styled-components";
 import Dashboard from "./components/main/Dashboard";
 import Initiatives from "./components/main/Initiatives";
+import { connect } from "react-redux";
 
 const AppContainer = styled.div`
   display: flex;
@@ -26,24 +27,23 @@ const MainContainer = styled.div`
 
 //this is the app
 
-function App() {
+function App(props) {
   return (
     <AppContainer className="App">
-      <Dashboard />
+      {props.userId ? <Dashboard /> : null}
       <MainContainer>
-        <Route path="/">
-          <Header />
-        </Route>
-        <Route exact path="/">
+        <Route exact path="/landing">
           <Landing />
         </Route>
         <Route exact path="/selection">
           <OnboardingFocus />
         </Route>
         <Route exact path="/initiatives">
+          <Header />
           <Initiatives />
         </Route>
         <Route exact path="/areas-of-focus">
+          <Header />
           <AreasOfFocus />
         </Route>
 
@@ -56,4 +56,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    userId: state.userId
+  }
+}
+
+export default connect(mapStateToProps, {})(App);
