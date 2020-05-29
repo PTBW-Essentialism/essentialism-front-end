@@ -24,10 +24,11 @@ const TrackerHeader = styled.div`
     ` : null)}
 `;
 
-const FocusTracker = (props) => {
+const FocusTracker = ({type, focus, importance}) => {
     return (
-        <TrackerContainer type={props.type}>
-            <TrackerHeader type={props.type}>{props.focus}</TrackerHeader>
+        <TrackerContainer type={type}>
+            <TrackerHeader type={type}>{focus}</TrackerHeader>
+            {/*importance ? <div>{importance}<div> : <textarea/>*/}
         </TrackerContainer>
     );
 }

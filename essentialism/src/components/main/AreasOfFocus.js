@@ -47,14 +47,17 @@ const AreasOfFocus = (props) => {
                 <FocusTracker
                     focus={userFocus[0].name}
                     type="area"
+                    importance={userFocus[0].importance}
                     />
                 <FocusTracker
                     focus={userFocus[1].name}
                     type="area"
+                    importance={userFocus[1].importance}
                     />
                 <FocusTracker
                     focus={userFocus[2].name}
                     type="area"
+                    importance={userFocus[2].importance}
                     />
             </FocusWrapper>
             : null}

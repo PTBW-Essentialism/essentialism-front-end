@@ -74,12 +74,6 @@ const OnboardingFocus = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (checkCount === 3){
-            handlePost(focusState)
-        }
-        else {
-            console.log("Please select exactly 3 areas of focus!")
-        }
     }
 
     const handlePost = (state) => {
@@ -99,15 +93,6 @@ const OnboardingFocus = (props) => {
         props.history.push(`/users/${props.userId}/focus`)
     }
 
-    const checkCounter = (i) => {
-            const tempFocusState = [...focusState];
-            tempFocusState[i].checked = !tempFocusState[i].checked;
-            setFocusState(tempFocusState);
-            if (focusState[i].checked) checkCount++;
-            else checkCount--;
-            console.log(focusState);
-    }
-
     return (
         <FocusForm onSubmit={handleSubmit}>
             <FormHeading>Please pick your top three areas of focus!</FormHeading>
@@ -122,7 +107,13 @@ const OnboardingFocus = (props) => {
                                 name={focus.name}
                                 value={focusState[i].checked}
                                 onChange={() => {
-                                    checkCounter(i);
+                                    const tempFocusState = [...focusState];
+                                    tempFocusState[i].checked = !tempFocusState[i].checked;
+                                    setFocusState(tempFocusState);
+                                    if (focusState[i].checked) checkCount++;
+                                    else checkCount--;
+                                    console.log(focusState);
+                                    console.log(checkCount)
                                 }}
                             />
                         </CheckboxLabel>
