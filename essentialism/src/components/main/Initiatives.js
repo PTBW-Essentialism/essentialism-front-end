@@ -122,12 +122,19 @@ const Initiatives = () => {
                         id="iDescription"
                         name="iDescription"
                         placeholder="initiative description"
+                        onChange={e => {
+                            handleChange(e, formState, setFormState);
+                        }}
                     />
                     <StyledLabel htmlFor="dueDate"></StyledLabel>
                     <StyledInput
                         type="date"
                         id="dueDate"
                         name="dueDate"
+                        value={formState.dueDate}
+                        onChange={e => {
+                            handleChange(e, formState, setFormState);
+                        }}
                     />
                     <CustomButton onSubmit={handleSubmit}>Submit</CustomButton>
                 </StyledForm>

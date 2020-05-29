@@ -17,7 +17,16 @@ const AreasOfFocus = (props) => {
         axios
         .get('https://essentialapi.herokuapp.com/users/:id/focus')
         .then((res) => {
-            console.log(res)
+            let userFocusArr = res.data.map(item => {
+                return {
+                    userID: item.userID,
+                    valuesID: item.valuesID,
+                    name: item.name,
+                    description: item.description,
+                    importance: item.importance,
+                };
+            });
+            setUserFocus([...userFocusArr]);
         })
         .catch((err) => {
             console.log(err)
