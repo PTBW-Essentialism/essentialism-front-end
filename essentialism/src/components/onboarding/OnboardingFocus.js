@@ -90,7 +90,6 @@ const OnboardingFocus = (props) => {
             }
             return null;
         })
-
         props.history.push(`/users/${props.userId}/focus`)
     }
 
