@@ -3,6 +3,7 @@ import axios from "axios";
 import FocusTracker from "./FocusTracker";
 import styled from "styled-components";
 import {connect} from "react-redux";
+import { axiosWithAuth } from "../../utils/AxiosWithAuth";
 
 const FocusWrapper = styled.div`
     display: flex;
@@ -14,13 +15,13 @@ const AreasOfFocus = (props) => {
     const [userFocus, setUserFocus] = useState([])
 
     useEffect(() => {
-        axios
+        axiosWithAuth()
         .get(`https://essentialapi.herokuapp.com/users/${props.userId}/focus`)
         .then((res) => {
             let userFocusArr = res.data.map(item => {
                 return {
-                    userID: item.userID,
-                    valuesID: item.valuesID,
+                    userId: item.userId,
+                    valuesId: item.valuesId,
                     name: item.name,
                     description: item.description,
                     importance: item.importance,
