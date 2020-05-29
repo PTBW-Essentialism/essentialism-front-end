@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { StyledForm, StyledLabel, StyledInput, handleChange, validate } from "../onboarding/Register";
 import {connect} from "react-redux";
 import {setUserId} from "../../state/Actions";
+import axios from "axios";
 
 
 const Login = (props) => {
@@ -15,7 +16,25 @@ const Login = (props) => {
         password: ""
     });
 
-    
+    const [focusTrue, setFocusTrue] = useState(false);
+
+    const userRouter = (userId) => {
+        axiosWithAuth().get(`/users/${userId}/focus`)
+        .then(res => {
+            console.log(res);
+            if (!window.localStorage.getItem('token')) {
+                window.localStorage.setItem('token', res.data.token)
+                props.history.push(`/focus`)
+            } else if (window.localStorage.getItem('token') && res.data.length > 0) {
+                props.history.push(`/users/${userId}/focus`)
+            } else if (window.localStorage.getItem('token')) {
+                props.history.push(`/focus`)
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
 
     const handleSubmit = (e, setterCB) => {
         e.preventDefault();
@@ -33,15 +52,8 @@ const Login = (props) => {
              .post('/auth/login', formState)
              .then((res) => {
                  console.log(res);
-
                  props.setUserId(res.data.userId)
-
-                 if (!window.localStorage.getItem('token')) {
-                    window.localStorage.setItem('token', res.data.token)
-                    props.history.push(`/focus`)
-                } else if (window.localStorage.getItem('token')) {
-                    props.history.push(`/focus`)
-                }
+                 userRouter(res.data.userId);
              })
              .catch(err => console.log(err))
     }

@@ -51,6 +51,7 @@ const CheckboxBody = styled.p`
 
 const OnboardingFocus = (props) => {
     const [focusState, setFocusState] = useState([]);
+    let checkCount = 0;
 
     useEffect(() => {
         axios.get("https://essentialapi.herokuapp.com/values")
@@ -73,7 +74,12 @@ const OnboardingFocus = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handlePost(focusState)
+        if (checkCount === 3){
+            handlePost(focusState)
+        }
+        else {
+            console.log("Please select exactly 3 areas of focus!")
+        }
     }
 
     const handlePost = (state) => {
@@ -106,8 +112,10 @@ const OnboardingFocus = (props) => {
                                 id={focus.name}
                                 name={focus.name}
                                 value={focusState[i].checked}
-                                onChange={e => {
+                                onChange={() => {
                                     focusState[i].checked = !focusState[i].checked;
+                                    if (focusState[i].checked) checkCount++;
+                                    else checkCount--;
                                     console.log(focusState);
                                 }}
                             />
@@ -116,7 +124,13 @@ const OnboardingFocus = (props) => {
                     </CheckboxCard>
                 );
             })}
-            <CustomButton onClick={handleSubmit} type="submit" className="focusSelection">Submit</CustomButton>
+            <CustomButton
+                onClick={handleSubmit}
+                type="submit"
+                className="focusSelection"
+            >
+                Submit
+            </CustomButton>
         </FocusForm>
     );
 }

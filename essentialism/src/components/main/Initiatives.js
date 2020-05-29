@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { StyledForm, StyledLabel, StyledInput, handleChange } from "../onboarding/Register";
 import { CustomButton } from "./CustomButton";
 import axios from "axios";
+import { connect } from "react-redux";
 
 const InitiativeAdder = styled.div`
     border: 1px solid black;
@@ -30,8 +31,9 @@ const StyledTextArea = styled.textarea`
 
 `
 
-const Initiatives = (props) => {
-    const [userInitiatives, setUserInitiatives] = useState([]);
+const Initiatives = ({userId}) => {
+    const [userInitiatives, setUserInitiatives] = useState();
+    const [userFocus, setUserFocus] = useState();
     const dummyData = [
         {
             id: 1,
@@ -66,9 +68,19 @@ const Initiatives = (props) => {
     ];
     
     useEffect(() => {
-        axios.get(`https://essentialapi.herokuapp.com/users/:id/initiatives`)
+        axios.get(`https://essentialapi.herokuapp.com/users/${userId}/initiatives`)
             .then(res => {
                 setUserInitiatives(res.data);
+            })
+            .catch(err => {
+                console.log(err)
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get(`https://essentialapi.herokuapp.com/users/${userId}/focus`)
+            .then(res => {
+                setUserFocus(res.data);
             })
             .catch(err => {
                 console.log(err)
@@ -88,7 +100,7 @@ const Initiatives = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(`https://essentialapi.herokuapp.com/users/:id/initiatives`, formState)
+        axios.post(`https://essentialapi.herokuapp.com/users/${userId}/initiatives`, formState)
             .then(res => {
                 console.log(res);
             })
@@ -109,7 +121,7 @@ const Initiatives = (props) => {
 
     const markComplete = (id) => {
         console.log("Task complete!");
-        axios.delete(`https://essentialapi.herokuapp.com/users/${props.userId}/initiatives/${id}`)
+        axios.delete(`https://essentialapi.herokuapp.com/users/${userId}/initiatives/${id}`)
             .then(res => {
                 console.log(res);
             })
@@ -143,9 +155,9 @@ const Initiatives = (props) => {
                         }}
                     >
                         <option value={0}>Please select a relevent focus</option>
-                        <option value={1}>Focus 1</option>
-                        <option value={2}>Focus 2</option>
-                        <option value={3}>Focus 3</option>
+                        <option value={1}>{userFocus[0].name}</option>
+                        <option value={2}>{userFocus[1].name}</option>
+                        <option value={3}>{userFocus[2].name}</option>
                         <option value="Other">Other</option>
                     </select>
                     <StyledLabel htmlFor="iDescriptions">Initiative description</StyledLabel>
@@ -175,13 +187,13 @@ const Initiatives = (props) => {
                 {dummyData.map((item, i) => {
                     return (
                         <InitiativeCard key={i}>
-                            <h3>{dummyData[i].iName}</h3>
-                            <h4>Relevent focus: {dummyData[i].userValuesID}</h4>
-                            <p>{dummyData[i].iDescription}</p>
-                            <p>Due: {dummyData[i].dueDate}</p>
+                            <h3>{userInitiatives[i].iName}</h3>
+                            <h4>Relevent focus: {userInitiatives[i].userValuesID}</h4>
+                            <p>{userInitiatives[i].iDescription}</p>
+                            <p>Due: {userInitiatives[i].dueDate}</p>
                             <button
                                 onClick={() => {
-                                    markComplete(dummyData.id);
+                                    markComplete(userInitiatives.id);
                                 }}
                             >
                                 Mark as complete
@@ -194,7 +206,11 @@ const Initiatives = (props) => {
     );
 }
 
-export default Initiatives;
+const mapStateToProps = (state) => {
+    return {userId: state.userId}
+}
+
+export default connect(mapStateToProps, {})(Initiatives);
 
 // {dummyData.map((item, i) => {
 //     {const markComplete = () => {
