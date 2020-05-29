@@ -113,7 +113,9 @@ const OnboardingFocus = (props) => {
                                 name={focus.name}
                                 value={focusState[i].checked}
                                 onChange={() => {
-                                    focusState[i].checked = !focusState[i].checked;
+                                    const tempFocusState = [...focusState];
+                                    tempFocusState[i].checked = !tempFocusState[i].checked;
+                                    setFocusState(tempFocusState);
                                     if (focusState[i].checked) checkCount++;
                                     else checkCount--;
                                     console.log(focusState);
