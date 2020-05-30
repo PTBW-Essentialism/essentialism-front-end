@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { StyledForm, StyledLabel, StyledInput, handleChange } from "../onboarding/Register";
+import { StyledForm, StyledLabel, StyledInput} from "../onboarding/Register";
 import { CustomButton } from "./CustomButton";
 import axios from "axios";
 import {axiosWithAuth} from "../../utils/AxiosWithAuth";
@@ -33,8 +33,10 @@ const StyledTextArea = styled.textarea`
 `
 
 const Initiatives = (props) => {
-    const [userInitiatives, setUserInitiatives] = useState();
+    const USERID = window.localStorage.getItem("userId");
+    const [userInitiatives, setUserInitiatives] = useState([]);
     const [userFocus, setUserFocus] = useState();
+
     const dummyData = [
         {
             id: 1,
@@ -68,21 +70,38 @@ const Initiatives = (props) => {
         },
     ];
     
+
     useEffect(() => {
         axiosWithAuth()
-            .get(`/users/${props.userId}/initiatives`)
+            .get(`/users/${USERID}/initiatives`)
             .then(res => {
                 console.log(res);
-                setUserInitiatives(res.data);
+                if (res.data.length) {
+                    setUserInitiatives(res.data);
+                }
             })
             .catch(err => {
                 console.log(err)
             });
-    }, []);
+    }, [])
+
+    const initiativesPost = () => {
+        axiosWithAuth()
+            .get(`/users/${USERID}/initiatives`)
+            .then(res => {
+                console.log(res);
+                if (res.data.length) {
+                    setUserInitiatives(res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            });
+    }
 
     useEffect(() => {
         axiosWithAuth()
-            .get(`/users/${props.userId}/focus`)
+            .get(`/users/${USERID}/focus`)
             .then(res => {
                 setUserFocus(res.data);
             })
@@ -92,12 +111,11 @@ const Initiatives = (props) => {
     }, []);
     
     const [formState, setFormState] = useState({
-        id: undefined, //how to set this to the initiative id?
         iName: "",
         iDescription: "",
         dueDate: "",
-        userID: undefined,
-        userValuesID: undefined,
+        userId: undefined,
+        userValuesId: undefined,
         completed: false,
         repeatable: false
     });
@@ -105,9 +123,10 @@ const Initiatives = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axiosWithAuth()
-        .post(`/users/${props.userId}/initiatives`, formState)
+        .post(`/users/${USERID}/initiatives`, formState)
             .then(res => {
                 console.log(res);
+                initiativesPost()
             })
             .catch(err => {
                 console.log(err);
@@ -117,16 +136,44 @@ const Initiatives = (props) => {
             iName: "",
             iDescription: "",
             dueDate: "",
-            userID: undefined,
-            userValuesID: undefined,
+            userId: undefined,
+            userValuesId: undefined,
             completed: false,
             repeatable: false
         });
+        window.location.reload(true);
+    }
+
+    const handleChange = (e) => {
+        setFormState({
+            ...formState,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    const InitiativeList = () => {
+        console.log(userInitiatives)
+        return userInitiatives.map((item, i) => {
+            return (
+                    <InitiativeCard key={i}>
+                        <h3>{userInitiatives[i].iName}</h3>
+                        <h4>Relevent focus: {userInitiatives[i].userValuesID}</h4>
+                        <p>{userInitiatives[i].iDescription}</p>
+                        <p>Due: {userInitiatives[i].dueDate}</p>
+                        <button
+                        onClick={() => {
+                            markComplete(userInitiatives.id);
+                        }}
+                        >
+                        Mark as complete
+                        </button>
+                    </InitiativeCard>);
+                })
     }
 
     const markComplete = (id) => {
         console.log("Task complete!");
-        axios.delete(`https://essentialapi.herokuapp.com/users/${props.userId}/initiatives/${id}`)
+        axios.delete(`https://essentialapi.herokuapp.com/users/${USERID}/initiatives/${id}`)
             .then(res => {
                 console.log(res);
             })
@@ -149,16 +196,16 @@ const Initiatives = (props) => {
                         placeholder="initiative title"
                         value={formState.iName}
                         onChange={e => {
-                            handleChange(e, formState, setFormState);
+                            handleChange(e);
                         }}
                         />
                     <StyledLabel htmlFor="userValuesID">Relevent focus</StyledLabel>
                     <select
-                        id="userValuesID"
-                        name="userValuesID"
+                        id="userValuesId"
+                        name="userValuesId"
                         value={formState.userValuesID}
                         onChange={e => {
-                            handleChange(e, formState, setFormState);
+                            handleChange(e);
                         }}
                     >
                         <option value={0}>Please select a relevent focus</option>
@@ -174,7 +221,7 @@ const Initiatives = (props) => {
                         placeholder="initiative description"
                         value={formState.iDescription}
                         onChange={e => {
-                            handleChange(e, formState, setFormState);
+                            handleChange(e);
                         }}
                         />
                     <StyledLabel htmlFor="dueDate"></StyledLabel>
@@ -184,30 +231,18 @@ const Initiatives = (props) => {
                         name="dueDate"
                         value={formState.dueDate}
                         onChange={e => {
-                            handleChange(e, formState, setFormState);
+                            handleChange(e);
                         }}
                         />
                     <CustomButton onSubmit={handleSubmit}>Submit</CustomButton>
                 </StyledForm>
                 </InitiativeAdder>
                 <InitiativeList>
-                    {dummyData.map((item, i) => {
-                        return (
-                            <InitiativeCard key={i}>
-                                <h3>{userInitiatives[i].iName}</h3>
-                                <h4>Relevent focus: {userInitiatives[i].userValuesID}</h4>
-                                <p>{userInitiatives[i].iDescription}</p>
-                                <p>Due: {userInitiatives[i].dueDate}</p>
-                                <button
-                                    onClick={() => {
-                                        markComplete(userInitiatives.id);
-                                    }}
-                                    >
-                                    Mark as complete
-                                </button>
-                            </InitiativeCard>
-                        );
-                    })}
+                    {
+                        userInitiatives && userInitiatives.length ?
+                        InitiativeList()
+                        : null
+                    }
                 </InitiativeList>
             </div>
             : null}
