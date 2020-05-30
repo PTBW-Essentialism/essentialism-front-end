@@ -14,6 +14,10 @@ const TrackerContainer = styled.div`
         width: 30vw;
         height: 30vw;
     ` : null)}
+
+    ${props => (props.type === "completed" ? `
+        background: pink;
+    ` : null)}
 `
 const TrackerHeader = styled.div`
     font-size: 4vw;

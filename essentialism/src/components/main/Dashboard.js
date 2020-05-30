@@ -26,10 +26,6 @@ const DashboardHeader = styled.div`
     height: auto;
 `;
 
-const StyledFocusTracker = styled.div`
-    background-color: pink;
-`
-
 
 const Dashboard = (props) => {
     const [userFocus, setUserFocus] = useState([]);
@@ -59,8 +55,6 @@ const Dashboard = (props) => {
         }
     }, [userFocus])
 
-    console.log(completed);
-
     return(
         userFocus.length ? 
         <DashboardContainer>
@@ -68,21 +62,9 @@ const Dashboard = (props) => {
                 <AppLogo>es</AppLogo>
                 <h2>essentialism</h2>
             </DashboardHeader>
-
-            {completed.includes(userFocus[0].name) ?
-            <StyledFocusTracker focus={userFocus[0].name} />
-            :
-            <FocusTracker focus={userFocus[0].name} />}
-
-           {completed.includes(userFocus[1].name) ?
-            <StyledFocusTracker focus={userFocus[1].name} />
-            :
-            <FocusTracker focus={userFocus[1].name} />}
-
-            {completed.includes(userFocus[2].name) ?
-            <StyledFocusTracker focus={userFocus[2].name} />
-            :
-            <FocusTracker focus={userFocus[2].name} />}
+            <FocusTracker type={completed.includes(userFocus[0].name) ? 'completed' : null} focus={userFocus[0].name} />
+            <FocusTracker type={completed.includes(userFocus[1].name) ? 'completed' : null} focus={userFocus[1].name} />
+            <FocusTracker type={completed.includes(userFocus[2].name) ? 'completed' : null} focus={userFocus[2].name} />
         </DashboardContainer>
         : null
     );

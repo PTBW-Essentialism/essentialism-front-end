@@ -138,7 +138,7 @@ const Initiatives = (props) => {
             iDescription: "",
             dueDate: "",
             userId: undefined,
-            userValuesId: undefined,
+            userFocus: undefined,
             completed: false,
             repeatable: false
         });
