@@ -142,7 +142,7 @@ const Initiatives = (props) => {
             completed: false,
             repeatable: false
         });
-        window.location.reload(true);
+        //window.location.reload(true);
     }
 
     const handleChange = (e) => {
