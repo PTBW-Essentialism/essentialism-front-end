@@ -27,11 +27,12 @@ const DashboardHeader = styled.div`
 `;
 
 const Dashboard = ({userId}) => {
-    const [userFocus, setUserFocus] = useState();
+    const [userFocus, setUserFocus] = useState([]);
+    const USERID = window.localStorage.getItem("userId");
 
     useEffect(() => {
         axiosWithAuth()
-        .get(`/users/${userId}/focus`)
+        .get(`/users/${USERID}/focus`)
         .then((res) => {
             console.log(res)
             setUserFocus(res.data)
@@ -44,15 +45,17 @@ const Dashboard = ({userId}) => {
     console.log(userFocus);
 
     return(
+        userFocus.length ? 
         <DashboardContainer>
-            <DashboardHeader>
+                <DashboardHeader>
                 <AppLogo>es</AppLogo>
                 <h2>essentialism</h2>
             </DashboardHeader>
-            <FocusTracker focus="1" />
-            <FocusTracker focus="2" />
-            <FocusTracker focus="3" />
+            <FocusTracker focus={userFocus[0].name} />
+            <FocusTracker focus={userFocus[1].name} />
+            <FocusTracker focus={userFocus[2].name} />
         </DashboardContainer>
+        : null
     );
 }
 
