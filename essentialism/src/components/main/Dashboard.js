@@ -26,7 +26,7 @@ const DashboardHeader = styled.div`
     height: auto;
 `;
 
-const Dashboard = ({userId}) => {
+const Dashboard = (props) => {
     const [userFocus, setUserFocus] = useState([]);
     const USERID = window.localStorage.getItem("userId");
 

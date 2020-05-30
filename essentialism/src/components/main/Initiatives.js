@@ -158,12 +158,12 @@ const Initiatives = (props) => {
             return (
                     <InitiativeCard key={i}>
                         <h3>{userInitiatives[i].iName}</h3>
-                        <h4>Relevent focus: {userInitiatives[i].userValuesID}</h4>
+                        <h4>Relevent focus: {userFocus[i].name}</h4>
                         <p>{userInitiatives[i].iDescription}</p>
                         <p>Due: {userInitiatives[i].dueDate}</p>
                         <button
                         onClick={() => {
-                            markComplete(userInitiatives.id);
+                            markComplete(item.id);
                         }}
                         >
                         Mark as complete
