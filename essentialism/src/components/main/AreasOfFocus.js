@@ -17,7 +17,7 @@ const AreasOfFocus = (props) => {
 
     useEffect(() => {
         axiosWithAuth()
-        .get(`https://essentialapi.herokuapp.com/users/${USERID}/focus`)
+        .get(`/users/${USERID}/focus`)
         .then((res) => {
             console.log(res)
             dataParser(res.data)

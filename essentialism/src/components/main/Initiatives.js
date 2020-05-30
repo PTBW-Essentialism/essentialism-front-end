@@ -86,6 +86,7 @@ const Initiatives = (props) => {
             });
     }, [])
 
+
     const initiativesPost = () => {
         axiosWithAuth()
             .get(`/users/${USERID}/initiatives`)
@@ -138,7 +139,7 @@ const Initiatives = (props) => {
             iDescription: "",
             dueDate: "",
             userId: undefined,
-            userValuesId: undefined,
+            userFocus: undefined,
             completed: false,
             repeatable: false
         });
@@ -146,6 +147,7 @@ const Initiatives = (props) => {
     }
 
     const handleChange = (e) => {
+        console.log(e.target.value);
         setFormState({
             ...formState,
             [e.target.name]: e.target.value,
@@ -211,9 +213,9 @@ const Initiatives = (props) => {
                         }}
                     >
                         <option value={0}>Please select a relevent focus</option>
-                        <option value={1}>{userFocus[0].name}</option>
-                        <option value={2}>{userFocus[1].name}</option>
-                        <option value={3}>{userFocus[2].name}</option>
+                        <option value={userFocus[0].name}>{userFocus[0].name}</option>
+                        <option value={userFocus[1].name}>{userFocus[1].name}</option>
+                        <option value={userFocus[2].name}>{userFocus[2].name}</option>
                         <option value="Other">Other</option>
                     </select>
                     <StyledLabel htmlFor="iDescriptions">Initiative description</StyledLabel>

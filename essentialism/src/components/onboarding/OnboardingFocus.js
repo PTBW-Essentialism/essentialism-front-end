@@ -51,6 +51,7 @@ const CheckboxBody = styled.p`
 
 const OnboardingFocus = (props) => {
     const [focusState, setFocusState] = useState([]);
+    const USERID = window.localStorage.getItem("userId");
     let checkCount = 0;
 
     useEffect(() => {
@@ -81,7 +82,7 @@ const OnboardingFocus = (props) => {
         state.map((item) => {
             if (item.checked === true) {
                 axiosWithAuth()
-                .post(`/users/${props.userId}/focus`, {userId: props.userId, valuesId: item.id})
+                .post(`/users/${USERID}/focus`, {userId: USERID, valuesId: item.id})
                 .then((res) => {
                     console.log(res)
                 })
@@ -91,8 +92,9 @@ const OnboardingFocus = (props) => {
             }
             return null;
         })
-        props.history.push(`/users/${props.userId}/focus`)
+        props.history.push(`/users/${USERID}/focus`)
     }
+    console.log(focusState);
 
     return (
         <FocusForm onSubmit={handleSubmit}>
