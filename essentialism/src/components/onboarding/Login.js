@@ -55,6 +55,11 @@ const Login = (props) => {
                  props.setUserId(res.data.userId)
                  userRouter(res.data.userId);
                  window.localStorage.setItem("userId", res.data.userId)
+
+                 if (!window.localStorage.getItem('token')) {
+                    window.localStorage.setItem('token', res.data.token)
+                    props.history.push(`/focus`)
+                }
              })
              .catch(err => console.log(err))
     }
