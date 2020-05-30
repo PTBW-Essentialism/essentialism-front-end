@@ -12,11 +12,12 @@ const FocusWrapper = styled.div`
 `
 
 const AreasOfFocus = (props) => {
+    const USERID = window.localStorage.getItem("userId");
     const [userFocus, setUserFocus] = useState()
 
     useEffect(() => {
         axiosWithAuth()
-        .get(`https://essentialapi.herokuapp.com/users/${props.userId}/focus`)
+        .get(`https://essentialapi.herokuapp.com/users/${USERID}/focus`)
         .then((res) => {
             console.log(res)
             dataParser(res.data)

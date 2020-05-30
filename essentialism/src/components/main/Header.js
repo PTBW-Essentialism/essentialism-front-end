@@ -13,12 +13,13 @@ const HeaderContainer = styled.div`
 `;
 
 const Header = (props) => {
+    const USERID = window.localStorage.getItem("userId");
     return(
         <HeaderContainer>
-            <Link to={`/users/${props.userId}/initiatives`}>
+            <Link to={`/users/${USERID}/initiatives`}>
                 <CustomButton>initiatives</CustomButton>
             </Link>
-            <Link to={`/users/${props.userId}/focus`}> {/* This url needs to have the id being filled in */}
+            <Link to={`/users/${USERID}/focus`}> {/* This url needs to have the id being filled in */}
                 <CustomButton>areas of focus</CustomButton>
             </Link>
         </HeaderContainer>

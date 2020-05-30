@@ -163,7 +163,7 @@ const Initiatives = (props) => {
                         <p>Due: {userInitiatives[i].dueDate}</p>
                         <button
                         onClick={() => {
-                            markComplete(item.id);
+                            markComplete(item.id, userFocus[i].name);
                         }}
                         >
                         Mark as complete
@@ -172,11 +172,12 @@ const Initiatives = (props) => {
                 })
     }
 
-    const markComplete = (id) => {
+    const markComplete = (id, focus) => {
         console.log("Task complete!");
         axios.delete(`https://essentialapi.herokuapp.com/users/${USERID}/initiatives/${id}`)
             .then(res => {
                 console.log(res);
+                window.localStorage.setItem(`${focus}`, true)
             })
             .catch(err => {
                 console.log(err);
