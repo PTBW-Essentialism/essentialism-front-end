@@ -37,6 +37,7 @@ const Initiatives = (props) => {
     const [userInitiatives, setUserInitiatives] = useState([]);
     const [userFocus, setUserFocus] = useState();
 
+    
     const dummyData = [
         {
             id: 1,
