@@ -28,9 +28,10 @@ const MainContainer = styled.div`
 //this is the app
 
 function App(props) {
+  const USERID = window.localStorage.getItem("userId");
   return (
     <AppContainer className="App">
-      {props.userId ? <Dashboard userId={props.userId}/> : null}
+      {props.userId || USERID ? <Dashboard userId={props.userId}/> : null}
       <MainContainer>
         <Route exact path="/">
           <Landing />

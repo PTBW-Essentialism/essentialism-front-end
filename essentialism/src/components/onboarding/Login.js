@@ -11,6 +11,7 @@ import axios from "axios";
 
 
 const Login = (props) => {
+    const USERID = window.localStorage.getItem("userId");
     const [formState, setFormState] = useState({
         username: "",
         password: ""
@@ -35,6 +36,8 @@ const Login = (props) => {
             console.log(err);
         });
     }
+
+    
 
     const handleSubmit = (e, setterCB) => {
         e.preventDefault();

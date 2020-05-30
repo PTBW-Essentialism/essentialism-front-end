@@ -37,6 +37,7 @@ const Initiatives = (props) => {
     const [userInitiatives, setUserInitiatives] = useState([]);
     const [userFocus, setUserFocus] = useState();
 
+    
     const dummyData = [
         {
             id: 1,
@@ -157,12 +158,12 @@ const Initiatives = (props) => {
             return (
                     <InitiativeCard key={i}>
                         <h3>{userInitiatives[i].iName}</h3>
-                        <h4>Relevent focus: {userInitiatives[i].userValuesID}</h4>
+                        <h4>Relevent focus: {userFocus[i].name}</h4>
                         <p>{userInitiatives[i].iDescription}</p>
                         <p>Due: {userInitiatives[i].dueDate}</p>
                         <button
                         onClick={() => {
-                            markComplete(userInitiatives.id);
+                            markComplete(item.id, userFocus[i].name);
                         }}
                         >
                         Mark as complete
@@ -171,11 +172,12 @@ const Initiatives = (props) => {
                 })
     }
 
-    const markComplete = (id) => {
+    const markComplete = (id, focus) => {
         console.log("Task complete!");
         axios.delete(`https://essentialapi.herokuapp.com/users/${USERID}/initiatives/${id}`)
             .then(res => {
                 console.log(res);
+                window.localStorage.setItem(`${focus}`, true)
             })
             .catch(err => {
                 console.log(err);

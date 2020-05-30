@@ -26,8 +26,14 @@ const DashboardHeader = styled.div`
     height: auto;
 `;
 
-const Dashboard = ({userId}) => {
+const StyledFocusTracker = styled.div`
+    background-color: pink;
+`
+
+
+const Dashboard = (props) => {
     const [userFocus, setUserFocus] = useState([]);
+    const [completed, setCompleted] = useState([]);
     const USERID = window.localStorage.getItem("userId");
 
     useEffect(() => {
@@ -42,7 +48,18 @@ const Dashboard = ({userId}) => {
         })
     }, [])
 
-    console.log(userFocus);
+    useEffect(() => {
+        if (userFocus && userFocus.length) {
+            userFocus.map((focus) => {
+                const completedFocus = window.localStorage.getItem(`${focus.name}`);
+                if(completedFocus) {
+                    setCompleted([...completed, focus.name])
+                }
+            })
+        }
+    }, [userFocus])
+
+    console.log(completed);
 
     return(
         userFocus.length ? 
@@ -51,9 +68,21 @@ const Dashboard = ({userId}) => {
                 <AppLogo>es</AppLogo>
                 <h2>essentialism</h2>
             </DashboardHeader>
-            <FocusTracker focus={userFocus[0].name} />
-            <FocusTracker focus={userFocus[1].name} />
-            <FocusTracker focus={userFocus[2].name} />
+
+            {completed.includes(userFocus[0].name) ?
+            <StyledFocusTracker focus={userFocus[0].name} />
+            :
+            <FocusTracker focus={userFocus[0].name} />}
+
+           {completed.includes(userFocus[1].name) ?
+            <StyledFocusTracker focus={userFocus[1].name} />
+            :
+            <FocusTracker focus={userFocus[1].name} />}
+
+            {completed.includes(userFocus[2].name) ?
+            <StyledFocusTracker focus={userFocus[2].name} />
+            :
+            <FocusTracker focus={userFocus[2].name} />}
         </DashboardContainer>
         : null
     );
