@@ -31,7 +31,7 @@ const Dashboard = ({userId}) => {
 
     useEffect(() => {
         axiosWithAuth()
-        .get(`https://essentialapi.herokuapp.com/users/${userId}/focus`)
+        .get(`/users/${userId}/focus`)
         .then((res) => {
             console.log(res)
             setUserFocus(res.data)
@@ -40,6 +40,8 @@ const Dashboard = ({userId}) => {
             console.log(err)
         })
     }, [])
+
+    console.log(userFocus);
 
     return(
         <DashboardContainer>

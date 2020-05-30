@@ -74,6 +74,7 @@ const OnboardingFocus = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        handlePost(focusState);
     }
 
     const handlePost = (state) => {
