@@ -30,21 +30,33 @@ export const StyledInput = styled.input`
     border: 1px solid white;
     border-radius: 7px;
     font-family: 'Josefin Slab', serif;
-    font-size: 1.4rem;
+    font-size: 2vw;
     font-weight: 900;
-    width: 100%;
+    width: 25vw;
     margin: 2%;
     text-align: center;
 
     &:focus {
         background-color: white;
         color: #8FCB9B;
+
+        ::placeholder {
+            color: #8FCB9B;
+            text-align: center;
+        }
     }
 
     ::placeholder {
         color: white;
         text-align: center;
     }
+`;
+
+const ErrorMessage = styled.div`
+    color: red;
+    position: relative;
+    top: 80px;
+    width: 25vw;
 `;
 
 export const handleChange = (e, stateObj, setterCB) => {
@@ -54,9 +66,7 @@ export const handleChange = (e, stateObj, setterCB) => {
         [e.target.name]: value
     });
     console.log(stateObj);
-    //validate();
 }
-
 
 const Register = (props) => {
     const [formState, setFormState] = useState({
@@ -68,21 +78,58 @@ const Register = (props) => {
         role: "user"
     });
 
+    const registerSchema = yup.object().shape({
+        firstName: yup.string().min(2, "Your first name must be at least 2 characters.").required("You must enter your first name."),
+        lastName: yup.string().min(2, "Your last name must be at least 2 characters.").required("You must enter your last name."),
+        email: yup.string().email("Please enter a valid email.").required("You must enter an email address."),
+        username: yup.string().min(5, "Your username must be at least 5 characters.").required("You must enter a username."),
+        password: yup.string().min(5, "Your password must be at least 5 characters.").required("You must enter a password."),
+        role: yup.string()
+    });
 
-const handleSubmit = (e, setterCB) => {
-    e.preventDefault();
-
-    userRegister();
-
-    setterCB({
+    const [errorState, setErrorState] = useState({
         firstName: "",
         lastName: "",
         email: "",
         username: "",
         password: "",
-        role: "user"
-    });
-}
+        role: ""
+    })
+
+    const validate = (e) => {
+        e.persist();
+        yup.reach(registerSchema, e.target.name)
+            .validate(e.target.value)
+            .then(valid => {
+                setErrorState({
+                    ...errorState,
+                    [e.target.name]: ""
+                });
+                console.log(errorState);
+            })
+            .catch(err => {
+                setErrorState({
+                    ...errorState,
+                    [e.target.name]: err.errors[0]
+                });
+                console.log(errorState);
+            });
+    }
+
+    const handleSubmit = (e, setterCB) => {
+        e.preventDefault();
+
+        userRegister();
+
+        setterCB({
+            firstName: "",
+            lastName: "",
+            email: "",
+            username: "",
+            password: "",
+            role: "user"
+        });
+    }
 
     const userRegister = () => {
         axios
@@ -110,6 +157,7 @@ const handleSubmit = (e, setterCB) => {
                     value={formState.firstName}
                     onChange={e => {
                         handleChange(e, formState, setFormState);
+                        validate(e);
                     }}
                 />
                 <StyledLabel htmlFor="lastName">Last Name</StyledLabel>
@@ -120,6 +168,7 @@ const handleSubmit = (e, setterCB) => {
                     value={formState.lastName}
                     onChange={e => {
                         handleChange(e, formState, setFormState);
+                        validate(e);
                     }}
                 />
                 <StyledLabel htmlFor="email">Email</StyledLabel>
@@ -130,6 +179,7 @@ const handleSubmit = (e, setterCB) => {
                     value={formState.email}
                     onChange={e => {
                         handleChange(e, formState, setFormState);
+                        validate(e);
                     }}
                 />
                 <StyledLabel htmlFor="username">Username</StyledLabel>
@@ -140,6 +190,7 @@ const handleSubmit = (e, setterCB) => {
                     value={formState.username}
                     onChange={e => {
                         handleChange(e, formState, setFormState);
+                        validate(e);
                     }}
                 />
                 <StyledLabel htmlFor="password">Password</StyledLabel>
@@ -151,9 +202,15 @@ const handleSubmit = (e, setterCB) => {
                     value={formState.password}
                     onChange={e => {
                         handleChange(e, formState, setFormState);
+                        validate(e);
                     }}
                 />
                 <CustomButton type="onboard">register</CustomButton>
+                {errorState.firstName ? <ErrorMessage>{errorState.firstName}</ErrorMessage> : null}
+                {errorState.lastName ? <ErrorMessage>{errorState.lastName}</ErrorMessage> : null}
+                {errorState.email ? <ErrorMessage>{errorState.email}</ErrorMessage> : null}
+                {errorState.username ? <ErrorMessage>{errorState.username}</ErrorMessage> : null}
+                {errorState.password ? <ErrorMessage>{errorState.password}</ErrorMessage> : null}
             </StyledForm>
         </LandingContainer>
     );

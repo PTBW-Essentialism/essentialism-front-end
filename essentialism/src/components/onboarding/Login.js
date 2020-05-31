@@ -37,8 +37,6 @@ const Login = (props) => {
         });
     }
 
-    
-
     const handleSubmit = (e, setterCB) => {
         e.preventDefault();
 
@@ -66,7 +64,6 @@ const Login = (props) => {
              })
              .catch(err => console.log(err))
     }
-    
 
     return (
         <LandingContainer>

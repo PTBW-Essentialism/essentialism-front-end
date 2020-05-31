@@ -3,15 +3,15 @@ import styled from "styled-components";
 
 export const CustomButton = styled.button`
     font-family: 'Vibur', cursive;
-    font-size: 1.5rem;
-    width: auto;
-    height: 50px;
+    font-size: 2vw;
+    width: 20vw;
+    height: 4vw;
     background-color: #F8F8FF;
     border: 1px solid #8FCB9B;
     border-radius: 25px;
     padding: 0px 15px;
     color: #8FCB9B;
-    margin: auto 5px;
+    margin: auto 0px;
 
     &:hover{
         color: #5B9279;
@@ -19,7 +19,7 @@ export const CustomButton = styled.button`
     }
 
     ${props => (props.type === "landing" ? `
-        font-size: 2.5rem;
+        font-size: 4vw;
         text-align: center;
         width: 12vw;
         height: auto;
@@ -32,8 +32,9 @@ export const CustomButton = styled.button`
     ${props => (props.type === "onboard" ? `
         position: relative;
         top: 5px;
-        left: 8px;
-        font-size: 2rem;
+        left: 25px;
+        font-size: 3vw;
+        line-height: .8;
     ` : null)}
 
     ${props => (props.className === "focusSelection" ? `
