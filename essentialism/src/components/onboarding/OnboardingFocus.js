@@ -52,7 +52,7 @@ const CheckboxBody = styled.p`
 const OnboardingFocus = (props) => {
     const [focusState, setFocusState] = useState([]);
     const USERID = window.localStorage.getItem("userId");
-    let checkCount = 0;
+    const [checkCount, setCheckCount] = useState(0);
 
     useEffect(() => {
         axios.get("https://essentialapi.herokuapp.com/values")
@@ -75,7 +75,11 @@ const OnboardingFocus = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handlePost(focusState);
+        if (checkCount === 3) {
+            handlePost(focusState);
+        } else {
+            window.alert("Please select exactly 3 areas of focus!");
+        }
     }
 
     const handlePost = (state) => {
@@ -94,7 +98,6 @@ const OnboardingFocus = (props) => {
         })
         props.history.push(`/users/${USERID}/focus`)
     }
-    console.log(focusState);
 
     return (
         <FocusForm onSubmit={handleSubmit}>
@@ -113,10 +116,8 @@ const OnboardingFocus = (props) => {
                                     const tempFocusState = [...focusState];
                                     tempFocusState[i].checked = !tempFocusState[i].checked;
                                     setFocusState(tempFocusState);
-                                    if (focusState[i].checked) checkCount++;
-                                    else checkCount--;
-                                    console.log(focusState);
-                                    console.log(checkCount)
+                                    if (focusState[i].checked) setCheckCount(checkCount + 1);
+                                    else setCheckCount(checkCount - 1);
                                 }}
                             />
                         </CheckboxLabel>
