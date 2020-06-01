@@ -124,6 +124,7 @@ const Initiatives = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(formState)
         axiosWithAuth()
         .post(`/users/${USERID}/initiatives`, formState)
             .then(res => {
@@ -139,7 +140,7 @@ const Initiatives = (props) => {
             iDescription: "",
             dueDate: "",
             userId: undefined,
-            userFocus: undefined,
+            userValuesId: undefined,
             completed: false,
             repeatable: false
         });
@@ -160,7 +161,7 @@ const Initiatives = (props) => {
             return (
                     <InitiativeCard key={i}>
                         <h3>{userInitiatives[i].iName}</h3>
-                        <h4>Relevent focus: {userFocus[i].name}</h4>
+                        <h4>Relevent focus: {userInitiatives[i].userValuesID}</h4>
                         <p>{userInitiatives[i].iDescription}</p>
                         <p>Due: {userInitiatives[i].dueDate}</p>
                         <button
@@ -213,9 +214,9 @@ const Initiatives = (props) => {
                         }}
                     >
                         <option value={0}>Please select a relevent focus</option>
-                        <option value={userFocus[0].name}>{userFocus[0].name}</option>
-                        <option value={userFocus[1].name}>{userFocus[1].name}</option>
-                        <option value={userFocus[2].name}>{userFocus[2].name}</option>
+                        <option value={1}>{userFocus[0].name}</option>
+                        <option value={2}>{userFocus[1].name}</option>
+                        <option value={3}>{userFocus[2].name}</option>
                         <option value="Other">Other</option>
                     </select>
                     <StyledLabel htmlFor="iDescriptions">Initiative description</StyledLabel>
