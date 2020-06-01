@@ -10,6 +10,11 @@ const FocusWrapper = styled.div`
     flex-wrap: wrap;
     justify-content: center;
 `
+const FocusHeader = styled.h1`
+    font-family: 'Vibur', cursive;
+    font-size: 4rem;
+    color: #8FCB9B;
+`;
 
 const AreasOfFocus = (props) => {
     const USERID = window.localStorage.getItem("userId");
@@ -42,7 +47,7 @@ const AreasOfFocus = (props) => {
 
     return(
         <div>
-        <h1>Areas of Focus</h1>
+        <FocusHeader>Areas of Focus</FocusHeader>
         {userFocus ?
             <FocusWrapper>
                 <FocusTracker
